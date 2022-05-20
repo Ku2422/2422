@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_gravity="center"
+              android:layout_width="300dp"
+              android:layout_height="450dp">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:layout_marginTop="20dp" android:orientation="vertical"
+                  android:layout_marginHorizontal="20dp"
+    >
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:text="시켰던 메뉴/가격" android:textSize="15dp"
+        />
+        <EditText android:layout_width="match_parent" android:layout_height="70dp"
+                  android:textSize="13dp"
+                  android:hint="시켰던 메뉴, 가격 입력"
+                  android:layout_marginVertical="5dp"
+                  android:gravity="fill_horizontal"
+                  android:inputType="textMultiLine"
+                  android:id="@+id/edit_price"
+                  android:padding="5dp" android:background="@drawable/border"
+        />
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:layout_margin="20dp" android:orientation="vertical"
+    >
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:text="후기" android:textSize="15dp"
+        />
+        <EditText android:layout_width="match_parent" android:layout_height="70dp"
+                  android:gravity="fill_horizontal"
+                  android:id="@+id/edit_review"
+                  android:textSize="13dp"
+                  android:hint="후기 입력"
+                  android:inputType="textMultiLine"
+                  android:layout_marginVertical="5dp"
+                  android:padding="5dp" android:background="@drawable/border"
+        />
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:layout_marginVertical="10dp" android:layout_marginHorizontal="20dp"
+                  android:orientation="vertical">
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:text="별점" android:textSize="15dp"
+        />
+        <RatingBar android:layout_width="wrap_content" android:layout_height="wrap_content"
+                   android:stepSize="1" android:numStars="5"
+                   android:layout_gravity="center" android:rating="4"
+                   android:id="@+id/rating"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:orientation="horizontal" android:layout_marginHorizontal="20dp"
+                  android:layout_marginTop="30dp">
+        <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content" android:layout_height="match_parent"
+                android:text="SUMMIT" android:background="@color/white"
+                android:id="@+id/btn_add_review"
+                android:layout_marginEnd="45dp"
+                android:textColor="#0277BD" android:layout_gravity="start"/>
+        <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content" android:layout_height="match_parent"
+                android:layout_marginStart="45dp"
+                android:id="@+id/btn_cancel"
+                android:text="CANCEL" android:background="@color/white"
+                android:textColor="#3C3C3C" android:layout_gravity="end"/>
+    </LinearLayout>
+</LinearLayout>
