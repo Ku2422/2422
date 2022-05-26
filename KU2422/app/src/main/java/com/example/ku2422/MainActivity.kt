@@ -1,13 +1,23 @@
 package com.example.ku2422
 
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Base64
+import android.util.Log
 import android.view.MenuItem
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
+import com.example.ku2422.databinding.ActivityLoginBinding
 import com.example.ku2422.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
+import com.kakao.sdk.auth.model.OAuthToken
+import com.kakao.sdk.user.UserApiClient
+import com.kakao.sdk.user.model.User
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 class MainActivity : AppCompatActivity(){
     lateinit var binding: ActivityMainBinding
@@ -24,6 +34,7 @@ class MainActivity : AppCompatActivity(){
         setContentView(binding.root)
         inNavigation()
     }
+
 
 
     private fun inNavigation() {
