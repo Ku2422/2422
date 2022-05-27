@@ -8,6 +8,7 @@ import android.util.Base64
 import android.util.Log
 import android.view.MenuItem
 import android.widget.FrameLayout
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import com.example.ku2422.databinding.ActivityLoginBinding
 import com.example.ku2422.databinding.ActivityMainBinding
@@ -20,7 +21,11 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
 class MainActivity : AppCompatActivity(){
+    companion object{
+        const val TAG = "MainActivity"
+    }
     lateinit var binding: ActivityMainBinding
+    private val mainViewModel: MainViewModel by viewModels()
 
     private val fl:FrameLayout by lazy{
         binding.frame
@@ -33,12 +38,16 @@ class MainActivity : AppCompatActivity(){
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         inNavigation()
+
     }
 
 
 
     private fun inNavigation() {
+
         supportFragmentManager.beginTransaction().add(fl.id, HomeFragment()).commit()
+
+
 
         bn.setOnItemSelectedListener {
             replaceFragment(
@@ -50,6 +59,7 @@ class MainActivity : AppCompatActivity(){
             )
             true
         }
+
     }
 
     private fun replaceFragment(fragment: Fragment){

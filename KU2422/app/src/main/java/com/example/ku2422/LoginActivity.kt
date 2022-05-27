@@ -6,13 +6,20 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.example.ku2422.databinding.ActivityLoginBinding
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
+
     companion object {
         const val TAG = "LoginActivity"
     }
@@ -23,13 +30,13 @@ class LoginActivity : AppCompatActivity() {
         } else if (token != null) {
             Log.i(TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
             var intent = Intent(this,MainActivity::class.java)
-            showUserInfo()
-            //TODO:: user정보 insert 해줘야함
+            insertUserInfo()
             startActivity(intent)
         }
     }
 
     lateinit var binding: ActivityLoginBinding
+    val userRdb: DatabaseReference = Firebase.database.getReference("UserDB")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,12 +59,28 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun showUserInfo(){
+    private fun insertUserInfo(){
         UserApiClient.instance.me{ user,error->
-            Toast.makeText(this@LoginActivity, "${user?.id}", Toast.LENGTH_SHORT).show()
             user?.properties?.entries?.forEach {
-                Log.d(TAG,"showUserInfo : ${it.key} ${it.value}")
-                Log.d(TAG,"showUserID : ${user?.id.toString()} ")
+
+
+                userRdb.addValueEventListener(object : ValueEventListener {
+                    override fun onCancelled(error: DatabaseError) {
+
+                    }
+
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        for (data in snapshot.children) {
+                            val curUser = data.getValue(User::class.java)
+                            curUser?.let {userit ->
+                                if (userit.userId != user?.id.toString()) {
+                                    val userinfo = User(user?.id.toString(),it.value)
+                                    userRdb.child(user?.id.toString()).setValue(userinfo)
+                                }
+                            }
+                        }
+                    }
+                })
             }
         }
     }
