@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:paddingVertical="5dp"
+              android:layout_marginVertical="5dp"
+              android:background="@drawable/border_list">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:orientation="horizontal" android:layout_marginHorizontal="10dp"
+                  android:layout_marginVertical="5dp"
+    >
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="식당 이름" android:textSize="18dp"
+                  android:layout_marginStart="0dp"
+                  android:layout_weight="3"
+                  android:id="@+id/item_restaurant"
+                  android:gravity="start"/>
+        <ImageView android:layout_width="wrap_content" android:layout_height="match_parent"
+                   android:background="@drawable/border"
+                   android:src="@drawable/ic_baseline_person_24"
+                   android:backgroundTint="#FF475051"
+                   android:id="@+id/item_writerImg"
+                   android:gravity="end"/>
+        <TextView android:layout_width="0dp" android:layout_height="match_parent"
+                  android:layout_weight="1"
+                  android:textSize="15dp"
+                  android:layout_marginStart="5dp"
+                  android:id="@+id/item_writer"
+                  android:text="작성자" android:background="@drawable/border" android:gravity="center"
+        />
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:orientation="horizontal" android:layout_marginHorizontal="10dp"
+                  android:layout_marginVertical="5dp"
+    >
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="메뉴/가격" android:textSize="14dp"
+                  android:layout_marginStart="15dp" android:layout_weight="3"/>
+        <RatingBar android:layout_width="wrap_content" android:layout_height="wrap_content"
+                   android:layout_marginEnd="10dp"
+                   android:numStars="5" android:rating="4"
+                   android:stepSize="1"
+                   android:id="@+id/item_rating"
+                   style="@style/Widget.AppCompat.RatingBar.Small"/>
+    </LinearLayout>
+    <TextView android:layout_width="match_parent" android:layout_height="42dp"
+              android:background="@drawable/border" android:textSize="14dp"
+              android:id="@+id/item_price"
+              android:paddingHorizontal="5dp"
+              android:layout_marginHorizontal="15dp"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="후기" android:textSize="14dp"
+              android:layout_marginStart="25dp" android:layout_marginVertical="5dp"/>
+    <TextView android:layout_width="match_parent" android:layout_height="42dp"
+              android:id="@+id/item_review"
+              android:background="@drawable/border" android:textSize="14dp"
+              android:paddingHorizontal="5dp"
+              android:layout_marginHorizontal="15dp"/>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:text="2022/02/22" android:layout_marginHorizontal="15dp"
+              android:layout_marginVertical="5dp"
+              android:id="@+id/item_date"
+              android:gravity="end" android:textSize="14dp"/>
+</LinearLayout>

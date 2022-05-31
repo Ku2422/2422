@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.kakao.sdk:v2-friend:2.10.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/d1f2d31c7b0a4772a4618e97108ddfbc/transformed/jetified-v2-friend-2.10.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d1f2d31c7b0a4772a4618e97108ddfbc/transformed/jetified-v2-friend-2.10.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d1f2d31c7b0a4772a4618e97108ddfbc/transformed/jetified-v2-friend-2.10.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.kakao.sdk/v2-friend/2.10.0/ede698881730ca4550f056646043e0382be58bc7/v2-friend-2.10.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
