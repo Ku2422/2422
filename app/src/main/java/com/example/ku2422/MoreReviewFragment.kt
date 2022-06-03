@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.example.ku2422.databinding.FragmentMoreReviewBinding
 
 
-class MoreReviewFragment(data: Store) : Fragment() {
+class MoreReviewFragment(val data: Store) : Fragment() {
     private var binding: FragmentMoreReviewBinding ?= null
 
     override fun onCreateView(
@@ -17,6 +17,9 @@ class MoreReviewFragment(data: Store) : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentMoreReviewBinding.inflate(inflater, container, false)
+
+        binding!!.itemLocate.text = data.locationX.toString()
+        binding!!.itemReview.text = data.review
 
         return binding!!.root
     }
