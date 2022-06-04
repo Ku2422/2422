@@ -1,9 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-<<<<<<< HEAD
 
-=======
->>>>>>> 5fc99370baf7514a20cb27c3719d9b355aea241d
     repositories {
         gradlePluginPortal()
         google()

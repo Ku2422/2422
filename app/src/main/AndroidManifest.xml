@@ -1,62 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-<<<<<<< HEAD
-
-=======
->>>>>>> 5fc99370baf7514a20cb27c3719d9b355aea241d
     package="com.example.ku2422">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-<<<<<<< HEAD
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
 
-    <application
 
+    <application
         android:name=".GlobalApplication"
         android:allowBackup="false"
-=======
-    <application
-        android:name=".GlobalApplication"
-        android:allowBackup="true"
->>>>>>> 5fc99370baf7514a20cb27c3719d9b355aea241d
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KU2422"
         android:usesCleartextTraffic="true">
+
         <activity
             android:name=".LoginActivity"
             android:exported="true">
 
-<<<<<<< HEAD
-=======
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
->>>>>>> 5fc99370baf7514a20cb27c3719d9b355aea241d
         </activity>
 
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan">
-
-<<<<<<< HEAD
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-=======
->>>>>>> 5fc99370baf7514a20cb27c3719d9b355aea241d
         </activity>
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
@@ -75,12 +55,9 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-<<<<<<< HEAD
             android:value="{MAPSAPIKEY}" />
 
-=======
-            android:value="AIzaSyC_FZvqoqG9deVZK_xN6dABZn4koTLQJzQ" />
->>>>>>> 5fc99370baf7514a20cb27c3719d9b355aea241d
+
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="{NATIVE_APP_KEY}" />

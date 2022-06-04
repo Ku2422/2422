@@ -211,7 +211,7 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
         google.clear()
 
         val nrplace = NRPlaces.Builder().listener(this)
-            .key(BuildConfig.GOOGLE_API_KEY)
+            .key("AIzaSyBmw17hP4pUDk-2XHzOA6laMgbCFiNYXRI")
             .radius(1000)
             .type(PlaceType.RESTAURANT)
             .latlng(location.latitude, location.longitude)
@@ -220,7 +220,7 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
 
 
         val nrplace2 = NRPlaces.Builder().listener(this)
-            .key(BuildConfig.GOOGLE_API_KEY)
+            .key("AIzaSyBmw17hP4pUDk-2XHzOA6laMgbCFiNYXRI")
             .radius(1000)
             .type(PlaceType.CAFE)
             .latlng(location.latitude, location.longitude)
