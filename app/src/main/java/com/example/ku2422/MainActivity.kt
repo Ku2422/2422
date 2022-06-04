@@ -25,7 +25,11 @@ class MainActivity : AppCompatActivity(){
         const val TAG = "MainActivity"
     }
     lateinit var binding: ActivityMainBinding
+<<<<<<< HEAD
     val mainViewModel: MainViewModel by viewModels()
+=======
+    private val mainViewModel: MainViewModel by viewModels()
+>>>>>>> 5fc99370baf7514a20cb27c3719d9b355aea241d
 
     private val fl:FrameLayout by lazy{
         binding.frame
@@ -48,6 +52,10 @@ class MainActivity : AppCompatActivity(){
         supportFragmentManager.beginTransaction().add(fl.id, HomeFragment()).commit()
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5fc99370baf7514a20cb27c3719d9b355aea241d
         bn.setOnItemSelectedListener {
             replaceFragment(
                 when(it.itemId){

@@ -5,13 +5,36 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.ku2422.adapter.FriendListAdapter
+import com.example.ku2422.adapter.ReviewListAdapter
+import com.example.ku2422.databinding.FragmentMypageBinding
+import com.example.ku2422.databinding.FragmentSocialBinding
+import com.example.ku2422.databinding.FragmentSocialListBinding
 
 class SocialListFragment : Fragment() {
+    private lateinit var binding: FragmentSocialListBinding
+    private lateinit var adapter: ReviewListAdapter
+    private lateinit var layoutManager: RecyclerView.LayoutManager
+    val reviewData: ArrayList<Store> = ArrayList()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_social_list, container, false)
+        binding = FragmentSocialListBinding.inflate(inflater, container, false)
+
+        // get reviewData
+        reviewData.add(Store("2258663590","말차라떼",4000,"쏘굿굿굿굿",5.0,887789f,123123f)) //temp
+        adapter = ReviewListAdapter(reviewData)
+
+        binding.recyclerReview.adapter = adapter
+
+        layoutManager = LinearLayoutManager(activity)
+        binding.recyclerReview.layoutManager = layoutManager
+
+        return binding.root
     }
 }

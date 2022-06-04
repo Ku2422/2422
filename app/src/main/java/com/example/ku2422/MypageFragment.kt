@@ -8,14 +8,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.ku2422.adapter.ReviewListAdapter
+import com.example.ku2422.databinding.FragmentMoreReviewBinding
 import com.example.ku2422.databinding.FragmentMypageBinding
 
 
 class MypageFragment : Fragment() {
-    lateinit var binding: FragmentMypageBinding
+    private lateinit var binding: FragmentMypageBinding
+    private lateinit var adapter: ReviewListAdapter
+    private lateinit var layoutManager: RecyclerView.LayoutManager
+    val reviewData: ArrayList<Store> = ArrayList()
 
     companion object{
         const val TAG = "MypageFragment"
+
+        fun newInstance() : MypageFragment {
+            return MypageFragment()
+        }
     }
 
     override fun onCreateView(
@@ -24,7 +35,28 @@ class MypageFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentMypageBinding.inflate(inflater, container, false)
-        return binding.root
+
+        // get reviewData
+        reviewData.add(Store("2258663590","말차라떼",4000,"쏘굿굿굿굿",5.0,887789f,123123f)) //temp
+        adapter = ReviewListAdapter(reviewData)
+
+        // To more review
+        adapter.itemClickListener = object: ReviewListAdapter.OnItemClickListener {
+            override fun onItemClick(data: Store) {
+                val frag = MoreReviewFragment(data)
+                val transaction = requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.frame, frag)
+                transaction.addToBackStack(null)
+                transaction.commit()
+            }
+        }
+
+        binding.recyclerReview.adapter = adapter
+
+        layoutManager = LinearLayoutManager(activity)
+        binding.recyclerReview.layoutManager = layoutManager
+
+        return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
