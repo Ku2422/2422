@@ -2,10 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
              android:layout_width="match_parent"
-             android:layout_height="wrap_content"
+             android:layout_height="match_parent"
              tools:context=".MoreReviewFragment">
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:layout_marginTop="40dp" android:orientation="vertical"
+    <LinearLayout android:layout_width="match_parent" android:layout_height="0dp"
+                  android:layout_marginTop="10dp" android:orientation="vertical"
+                  android:layout_weight="1"
                   android:layout_marginHorizontal="20dp"
     >
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -18,8 +19,10 @@
                   android:padding="5dp" android:background="@drawable/border"
         />
     </LinearLayout>
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:layout_margin="20dp" android:orientation="vertical"
+    <LinearLayout android:layout_width="match_parent" android:layout_height="0dp"
+                  android:layout_marginHorizontal="20dp" android:orientation="vertical"
+                  android:layout_weight="1"
+                  android:layout_marginBottom="10dp"
     >
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:text="후기" android:textSize="18dp"
@@ -32,7 +35,8 @@
         />
     </LinearLayout>
     <fragment
-            android:layout_width="match_parent" android:layout_height="400dp"
+            android:layout_width="match_parent" android:layout_height="0dp"
+            android:layout_weight="4"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:id="@+id/map"/>
 

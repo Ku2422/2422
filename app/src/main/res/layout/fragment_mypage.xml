@@ -12,16 +12,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/text_mypage_search"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"/>
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp" android:layout_marginBottom="16dp"/>
     <LinearLayout android:layout_width="150dp" android:layout_height="wrap_content"
                   android:background="@drawable/border_rec"
+                  android:id="@+id/linearLayout3"
                   app:layout_constraintStart_toEndOf="@+id/text_mypage_search"
-                  android:id="@+id/linearLayout3" app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                  android:layout_marginBottom="10dp"
-                  android:layout_marginStart="50dp"
-                  app:layout_constraintEnd_toEndOf="parent">
+                  android:layout_marginVertical="10dp"
+                  android:layout_marginStart="60dp"
+                  app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+    >
         <Spinner android:layout_width="150dp" android:layout_height="match_parent"
                  android:padding="3dp"
                  android:entries="@array/sort" android:id="@+id/spinner"
@@ -36,17 +36,16 @@
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:id="@+id/linearLayout"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="0.558"
-            app:layout_constraintTop_toBottomOf="@+id/btn_logout">
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="0.684">
 
         <LinearLayout
                 android:layout_margin="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:background="@drawable/border">
-            <LinearLayout android:layout_width="48dp" android:layout_height="match_parent"
+            <LinearLayout android:layout_width="48dp" android:layout_height="wrap_content"
                           android:background="@drawable/border_img">
                 <androidx.appcompat.widget.AppCompatButton
                         android:layout_width="match_parent"
@@ -65,13 +64,12 @@
 
         <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:scrollbars="vertical"
                 android:id="@+id/recycler_review"
                 tools:listitem="@layout/list_review"/>
 
     </LinearLayout>
-
     <androidx.appcompat.widget.AppCompatButton
             android:text="로그아웃"
             android:layout_width="wrap_content"
@@ -79,7 +77,9 @@
             android:id="@+id/btn_logout"
             android:backgroundTint="#3C3C3C"
             android:textColor="@color/white"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="36dp"/>
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.888"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.698"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
