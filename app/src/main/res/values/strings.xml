@@ -17,4 +17,6 @@
         <item>평점순</item>
         <item>거리순</item>
     </string-array>
+    <string name="shared_pref_name">2224</string>
+    <string name="is_login">login</string>
 </resources>

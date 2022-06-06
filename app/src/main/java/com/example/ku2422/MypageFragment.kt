@@ -139,11 +139,16 @@ class MypageFragment : Fragment() {
 
     //예시
     private fun testGetValue() {
-        var storeInfo = Store("2258663590","","user1","건대카페","말차라떼", 4500,"so good", 5.0,"2022.01.01", 887789f,123123f)
+        // var storeInfo = Store("2258663590","","user1","건대카페","말차라떼", 4500,"so good", 5.0,"2022.01.01", 887789f,123123f)
 
-        StoreDB.insertStore(storeInfo){
+        val id =GlobalApplication.getInstance().getValue("userId")
+        Log.i(TAG, "testGetValue: $id")
 
-        }
+//        var storeInfo = Store("2258663590","말차라떼",4000,"쏘굿굿굿굿",5.0,887789f,123123f)
+//
+//        StoreDB.insertStore(storeInfo){
+//
+//        }
 
     }
 }

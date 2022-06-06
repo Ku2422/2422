@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity(){
         const val TAG = "MainActivity"
     }
     lateinit var binding: ActivityMainBinding
-    private val mainViewModel: MainViewModel by viewModels()
 
     private val fl:FrameLayout by lazy{
         binding.frame
