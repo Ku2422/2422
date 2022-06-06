@@ -6,5 +6,5 @@ data class User(
     val userName: String = "",
     val userImg: String = "",
     val totalReviewNum: Int = 0,
-    val friendId:String = " "   //ArrayList<String> = arrayListOf()
+    //friendId 삭제
 )

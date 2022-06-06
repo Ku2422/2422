@@ -1,5 +1,8 @@
 package com.example.ku2422
 
+import android.content.Context
+import android.util.Log
+import android.widget.Toast
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -13,7 +16,7 @@ object UserDB {
     fun getUserById(id: String,completion:(user: User)->Unit) {
         userRdb.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
-                //실패는 없습니다.
+                Log.e("UserDB", "onCancelled : getUserById")
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -31,11 +34,27 @@ object UserDB {
 
     //친구추가
     fun adduserFriend(userId:String ,friendId: String,complition:(flag : Boolean)->Unit){
-        userRdb.child(userId).child("friendId").setValue(friendId) .addOnCompleteListener {
-            complition(true)
-        }.addOnFailureListener {
-            complition(false)
-        }
+        var friendcount = 0
+        val getFriendRdb = userRdb.child(userId).child("friendId")
+        getFriendRdb.addListenerForSingleValueEvent(object: ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("UserDB", "onCancelled: adduserFriend" )
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(data in snapshot.children){
+                    friendcount = friendcount + 1
+                }
+                getFriendRdb.child(friendcount.toString()).setValue(friendId).addOnCompleteListener {
+                    complition(true)
+                }.addOnFailureListener {
+                    complition(false)
+                }
+                return
+            }
+
+
+        })
     }
 
     fun deleteUser(userId: String,complition:(flag : Boolean)->Unit){
