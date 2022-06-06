@@ -20,6 +20,7 @@ import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
 
+
     companion object {
         const val TAG = "LoginActivity"
     }
@@ -60,7 +61,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun insertUserInfo(){
+        var user_id = ""
         UserApiClient.instance.me{ user,error->
+            user_id = user?.id.toString()
+            setSharedPreference(user_id)
             user?.properties?.entries?.forEach {
 
 
@@ -83,5 +87,18 @@ class LoginActivity : AppCompatActivity() {
                 })
             }
         }
+    }
+
+    private fun setSharedPreference(id: String){
+
+        GlobalApplication.getInstance().run {
+            putKeyValue("userId", id)
+        }
+
+//        Toast.makeText(this@LoginActivity, "valid", Toast.LENGTH_SHORT).show()
+//        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+//        intent.putExtra("id", id)
+//        startActivity(intent)
+//        finish()
     }
 }
