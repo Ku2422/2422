@@ -68,20 +68,23 @@ class LoginActivity : AppCompatActivity() {
             user?.properties?.entries?.forEach {
 
 
-                userRdb.addValueEventListener(object : ValueEventListener {
+                userRdb.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(error: DatabaseError) {
-
+                        Log.e(TAG, "onCancelled: insertUserInfo", )
                     }
-
                     override fun onDataChange(snapshot: DataSnapshot) {
+                        var flag =false
                         for (data in snapshot.children) {
                             val curUser = data.getValue(User::class.java)
                             curUser?.let {userit ->
-                                if (userit.userId != user?.id.toString()) {
-                                    val userinfo = User(user?.id.toString(),it.value)
-                                    userRdb.child(user?.id.toString()).setValue(userinfo)
+                                if (userit.userId == user?.id.toString()) {
+                                    flag = true
                                 }
                             }
+                        }
+                        if(!flag){
+                            val userinfo = User(user?.id.toString(),it.value)
+                            userRdb.child(user?.id.toString()).setValue(userinfo)
                         }
                     }
                 })
@@ -94,11 +97,5 @@ class LoginActivity : AppCompatActivity() {
         GlobalApplication.getInstance().run {
             putKeyValue("userId", id)
         }
-
-//        Toast.makeText(this@LoginActivity, "valid", Toast.LENGTH_SHORT).show()
-//        val intent = Intent(this@LoginActivity, MainActivity::class.java)
-//        intent.putExtra("id", id)
-//        startActivity(intent)
-//        finish()
     }
 }

@@ -77,7 +77,10 @@ class MypageFragment : Fragment() {
     private fun testGetValue() {
 
         val id =GlobalApplication.getInstance().getValue("userId")
-        Log.i(TAG, "testGetValue: $id")
+        UserDB.adduserFriend(id!!,"2258618761"){
+
+        }
+//        Log.i(TAG, "testGetValue: $id")
 
 //        var storeInfo = Store("2258663590","말차라떼",4000,"쏘굿굿굿굿",5.0,887789f,123123f)
 //
