@@ -41,13 +41,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import noman.googleplaces.*
-
-
 class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnMarkerClickListener  {
 
 
 
     var scope = CoroutineScope(Dispatchers.Main)
+    lateinit var UID : String
 
     //마커 클릭시 정보 저장
     lateinit var markerName : String
@@ -62,6 +61,7 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
 
     }
 
+    var check = true
     //GOOGLEMAP
 
     lateinit var google: GoogleMap
@@ -73,7 +73,7 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
         android.Manifest.permission.ACCESS_COARSE_LOCATION
     )
 
-    var locGps = LatLng(37.2892294, 126.8164757)
+    var locGps = LatLng(37.2892313,126.8164737)
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     lateinit var locationRequest: LocationRequest
     lateinit var locationRequest2: LocationRequest
@@ -85,17 +85,14 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
 
 
 
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
         var rootView = inflater.inflate(R.layout.fragment_home, container, false)
-
-
+        UID =GlobalApplication.getInstance().getValue("userId")!!
+        initLocation()
         //구글 맵 뷰
         mView = rootView.findViewById(R.id.map)
         mView.onCreate(savedInstanceState)
@@ -107,30 +104,34 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
 
         btn.setOnClickListener {
             //GPS 버튼 생성 후 현재 위치 부르는 용도
-            setMaptoGPS(locGps)
+            if(check) {
+                setMaptoGPS(locGps)
+            }
+            else
+                showGPSSetting()
+
         }
 
         btn2.setOnClickListener {
-            //마커 눌렀을 때 DIALOG생성
             //USERID MENU 수정 예정, DB연동 확인
             val dialog = ReviewDialog(mainActivity)
             dialog.clickAdd(object : ReviewDialog.ClickListener{
-                override fun ClickBtn(price: String, review: String, rating: Int) {
-                    var tmpStore = Store("2258663590","우렁쌈밥",price.toInt(),review.toString(),rating.toDouble(),markerLoc.latitude.toFloat(),markerLoc.longitude.toFloat())
+                override fun ClickBtn(menu :String, price: String, review: String, rating: Int) {
+                    var tmpStore = Store(UID,menu,price.toInt(),review.toString(),rating.toDouble(),markerLoc.latitude.toFloat(),markerLoc.longitude.toFloat())
                     StoreDB.insertStore(tmpStore){
 
                     }
                 }
             })
+
             dialog.showDlg()
         }
 
         //GPS 세팅
-        initLocation()
 
         //구글 맵 검색 창
         if(!Places.isInitialized()) {
-            Places.initialize(mainActivity.applicationContext,BuildConfig.GOOGLE_API_KEY2)
+            Places.initialize(mainActivity.applicationContext,"AIzaSyB3XIBu35OK_npiXVicBiXfV6ge-NEta24")
         }
         placesClient = Places.createClient(mainActivity)
         val autocompleteFragment = childFragmentManager.findFragmentById(R.id.place_autocomplete_fragment)as AutocompleteSupportFragment?
@@ -154,6 +155,7 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
                 setMaptoGPS(place.latLng)
             }
         })
+
         return rootView
     }
 
@@ -231,15 +233,17 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
 
 
     //GPS SETTING
+    //gps 셋팅 작업 화면 끝나면 돌아옴
     val activityResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (checkGPSProvider()) {
                 startLocationUpdates()
+                check = true
             } else {
-
+                check = false
             }
         }
-
+    //결과 받기
     @RequiresApi(Build.VERSION_CODES.N)
     val locationPermissionRequest =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
@@ -249,10 +253,13 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
                     android.Manifest.permission.ACCESS_COARSE_LOCATION,
                     false
                 )) -> {
+                    //둘다 허용
                     startLocationUpdates()
+                    check = true
                 }
                 else -> {
-
+                    check = false
+                    showGPSSetting()
                 }
             }
         }
@@ -286,6 +293,7 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
         })
 
         builder.setNegativeButton("취소", DialogInterface.OnClickListener { dialog, id ->
+            check = false
             dialog.dismiss()
         })
         builder.create().show()
@@ -309,14 +317,14 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
     private fun initLocation() {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(mainActivity)
         locationRequest = LocationRequest.create().apply {
-            interval = 10000
-            fastestInterval = 5000
+            interval = 100000
+            fastestInterval = 50000
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }
 
         locationRequest2 = LocationRequest.create().apply {
-            interval = 10000
-            fastestInterval = 5000
+            interval = 100000
+            fastestInterval = 50000
             priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
         }
 
@@ -352,7 +360,6 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
                     )
                 }
             }
-
             checkCoarseLocationPermission() -> {
                 startupdate = true
                 fusedLocationProviderClient.requestLocationUpdates(
@@ -364,10 +371,10 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
                 mainActivity,
                 android.Manifest.permission.ACCESS_COARSE_LOCATION
             ) -> {
-                showPermissionRequestDlg()
+                showGPSSetting()
             }
             else -> {
-                locationPermissionRequest.launch(permissions)
+                showPermissionRequestDlg()
             }
         }
     }
@@ -386,7 +393,7 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
     override fun onResume() {
         super.onResume()
         mView.onResume()
-        if (!startupdate)
+        if (!startupdate&&check)
             startLocationUpdates()
     }
 
@@ -406,9 +413,5 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
         mView.onLowMemory()
     }
 }
-//    fun front(){
-//        childFragmentManager.beginTransaction()
-//
-//        //마커클릭시
-//
-//    }
+
+
