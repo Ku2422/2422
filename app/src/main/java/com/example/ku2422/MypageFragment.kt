@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +21,7 @@ import com.example.ku2422.data.LoginRepository
 import com.example.ku2422.data.model.LoggedInUser
 import com.example.ku2422.databinding.FragmentMoreReviewBinding
 import com.example.ku2422.databinding.FragmentMypageBinding
+import com.kakao.sdk.user.UserApiClient
 
 
 class MypageFragment : Fragment() {
@@ -28,6 +30,7 @@ class MypageFragment : Fragment() {
     private lateinit var layoutManager: RecyclerView.LayoutManager
     lateinit var userManager: LoginRepository
     lateinit var userId: String
+    lateinit var currUser: User
     var reviewData: ArrayList<Store> = ArrayList()
     var searchData: ArrayList<Store> = ArrayList()
     var data = mutableListOf<Store>()
@@ -47,18 +50,16 @@ class MypageFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentMypageBinding.inflate(inflater, container, false)
 
-//        userId = GlobalApplication.getInstance().getValue("userId")!!
-//        StoreDB.getStoreById("userId") {
-//            reviewData.add(it)
-//        }
+        userId = GlobalApplication.getInstance().getValue("userId")!!
+        Log.i("userId", userId)
 
-        // get reviewData
-        reviewData.add(Store("2258663590","","user1","건대카페","말차라떼",
-            4500,"so good", 5.0,"2022-01-01", 887789f,123123f)) //temp
-        reviewData.add(Store("2258663590","","user1","레스티오","아이스티",
-            4000,"sooooo good", 4.0,"2022-03-01", 887789f,123123f)) //temp
-        reviewData.add(Store("2258663590","","user1","건대식당","감자탕",
-            9000,"good", 5.0,"2022-02-15", 887789f,123123f)) //temp
+        StoreDB.getStoreById(userId){
+//                for (review in it!!){
+//                    reviewData.add(review)
+//                }
+            reviewData = it
+            Log.i("StoreDB", it.toString())
+        }
 
         adapter = ReviewListAdapter(reviewData)
 
