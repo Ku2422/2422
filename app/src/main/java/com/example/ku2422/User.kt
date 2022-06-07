@@ -6,5 +6,4 @@ data class User(
     val userName: String = "",
     val userImg: String = "",
     val totalReviewNum: Int = 0,
-    //friendId 삭제
 )

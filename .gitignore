@@ -256,7 +256,7 @@ bin/
 gen/
 
 # Gradle files
-.gradle
+.gradle/
 
 # Signing files
 .signing/
