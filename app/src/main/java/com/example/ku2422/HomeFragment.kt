@@ -37,17 +37,20 @@ import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
+import com.kakao.sdk.user.UserApiClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import noman.googleplaces.*
+import java.text.SimpleDateFormat
+
 class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnMarkerClickListener  {
 
-
+    val dataFormat1 = SimpleDateFormat("yyyy-MM-dd") // 년 월 일
 
     var scope = CoroutineScope(Dispatchers.Main)
     lateinit var UID : String
-
+    lateinit var UNAME : String
     //마커 클릭시 정보 저장
     lateinit var markerName : String
     lateinit var markerLoc : LatLng
@@ -60,7 +63,7 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
         mainActivity = context as MainActivity
 
     }
-
+    var checkStore = false
     var check = true
     //GOOGLEMAP
 
@@ -91,7 +94,15 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
     ): View? {
 
         var rootView = inflater.inflate(R.layout.fragment_home, container, false)
+        lateinit var UID : String
+        lateinit var UNAME : String
+        markerName = ""
         UID =GlobalApplication.getInstance().getValue("userId")!!
+        UserApiClient.instance.me{ user, error->
+            user?.properties?.entries?.forEach {
+                UNAME = it.value
+            }
+        }
         initLocation()
         //구글 맵 뷰
         mView = rootView.findViewById(R.id.map)
@@ -112,20 +123,37 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
 
         }
 
-//        btn2.setOnClickListener {
-//            //USERID MENU 수정 예정, DB연동 확인
-//            val dialog = ReviewDialog(mainActivity)
-//            dialog.clickAdd(object : ReviewDialog.ClickListener{
-//                override fun ClickBtn(menu :String, price: Int, review: String, rating: Int) {
-//                    var tmpStore = Store(UID,menu,price.toInt(),review,rating.toDouble(),markerLoc.latitude.toFloat(),markerLoc.longitude.toFloat())
-//                    StoreDB.insertStore(tmpStore){
-//
-//                    }
-//                }
-//            })
-//
-//            dialog.showDlg()
-//        }
+        btn2.setOnClickListener {
+            //USERID MENU 수정 예정, DB연동 확인
+            val dialog = ReviewDialog(mainActivity)
+            dialog.clickAdd(object : ReviewDialog.ClickListener {
+                override fun ClickBtn(menu: String, price: Int, review: String, rating: Int) {
+                    val currentTime: Long = System.currentTimeMillis()
+                    var tmpStore = Store(
+                        UID,
+                        "img",
+                        UNAME,
+                        markerName,
+                        menu,
+                        price.toInt(),
+                        review,
+                        rating.toDouble(),
+                        dataFormat1.format(currentTime).toString(),
+                        markerLoc.latitude.toFloat(),
+                        markerLoc.longitude.toFloat()
+                    )
+                    StoreDB.insertStore(tmpStore) {
+
+                    }
+                }
+            })
+            if (checkStore) {
+                dialog.showDlg()
+                checkStore = false
+            }else{
+                Toast.makeText(mainActivity,"가게를 선택해주세요",Toast.LENGTH_SHORT).show()
+            }
+        }
 
         //GPS 세팅
 
@@ -178,6 +206,7 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
         marker.showInfoWindow()
         markerName = marker.title.toString()
         markerLoc = marker.position
+        checkStore = true
         return true
     }
 
@@ -412,6 +441,8 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
         super.onLowMemory()
         mView.onLowMemory()
     }
+
+
 }
 
 

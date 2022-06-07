@@ -59,6 +59,7 @@ class MypageFragment : Fragment() {
 //                }
             reviewData = it
             Log.i("StoreDB", it.toString())
+            Log.i("reviewData", reviewData.toString())
         }
 
         adapter = ReviewListAdapter(reviewData)
