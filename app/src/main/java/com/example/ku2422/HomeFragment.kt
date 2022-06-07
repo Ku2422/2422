@@ -112,20 +112,20 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
 
         }
 
-        btn2.setOnClickListener {
-            //USERID MENU 수정 예정, DB연동 확인
-            val dialog = ReviewDialog(mainActivity)
-            dialog.clickAdd(object : ReviewDialog.ClickListener{
-                override fun ClickBtn(menu :String, price: Int, review: String, rating: Int) {
-                    var tmpStore = Store(UID,menu,price.toInt(),review,rating.toDouble(),markerLoc.latitude.toFloat(),markerLoc.longitude.toFloat())
-                    StoreDB.insertStore(tmpStore){
-
-                    }
-                }
-            })
-
-            dialog.showDlg()
-        }
+//        btn2.setOnClickListener {
+//            //USERID MENU 수정 예정, DB연동 확인
+//            val dialog = ReviewDialog(mainActivity)
+//            dialog.clickAdd(object : ReviewDialog.ClickListener{
+//                override fun ClickBtn(menu :String, price: Int, review: String, rating: Int) {
+//                    var tmpStore = Store(UID,menu,price.toInt(),review,rating.toDouble(),markerLoc.latitude.toFloat(),markerLoc.longitude.toFloat())
+//                    StoreDB.insertStore(tmpStore){
+//
+//                    }
+//                }
+//            })
+//
+//            dialog.showDlg()
+//        }
 
         //GPS 세팅
 
