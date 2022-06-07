@@ -2,6 +2,7 @@ package com.example.ku2422
 
 import android.app.Dialog
 import android.content.Context
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RatingBar
@@ -11,7 +12,7 @@ class ReviewDialog(context: Context) {
     lateinit var OnClickListener : ClickListener
 
     interface ClickListener{
-        fun ClickBtn(price : String, review : String, rating : Int)
+        fun ClickBtn(menu : String, price : Int, review : String, rating : Int)
     }
 
     fun clickAdd(listener : ClickListener){
@@ -20,7 +21,7 @@ class ReviewDialog(context: Context) {
     fun showDlg(){
         dialog.setContentView(R.layout.dialog_review)
         dialog.setCancelable(false)
-
+        var editMenu = dialog.findViewById<EditText>(R.id.edit_menu)
         var editPrice = dialog.findViewById<EditText>(R.id.edit_price)
         var editReview = dialog.findViewById<EditText>(R.id.edit_review)
         var rating_Num = dialog.findViewById<RatingBar>(R.id.rating_Num)
@@ -28,7 +29,10 @@ class ReviewDialog(context: Context) {
         var cancelBtn = dialog.findViewById<Button>(R.id.btn_cancel)
 
         addBtn.setOnClickListener {
-            OnClickListener.ClickBtn(editPrice.text.toString(),editReview.text.toString(),rating_Num.rating.toInt())
+            if(editPrice.text.toString() != "" && editMenu.text.toString() != ""){
+                Log.i("test",editPrice.text.toString()+" "+editMenu.text.toString())
+                OnClickListener.ClickBtn(editMenu.text.toString(),editPrice.text.toString().toInt(),editReview.text.toString(),rating_Num.rating.toInt())
+                }
             dialog.dismiss()
         }
         cancelBtn.setOnClickListener {
