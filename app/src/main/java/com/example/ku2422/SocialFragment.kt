@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ku2422.adapter.FriendListAdapter
@@ -20,7 +22,8 @@ class SocialFragment : Fragment() {
     private lateinit var binding: FragmentSocialBinding
     private lateinit var adapter: FriendListAdapter
     private lateinit var layoutManager: RecyclerView.LayoutManager
-    val friendData: ArrayList<User> = ArrayList()
+    var friendData: ArrayList<User> = ArrayList()
+    var searchData: ArrayList<User> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,12 +34,14 @@ class SocialFragment : Fragment() {
 
         // get friendData
         friendData.add(User("20202020", "홍길동", "", 3)) //temp
+        friendData.add(User("20111111", "고길동", "", 2)) //temp
+
         adapter = FriendListAdapter(friendData)
         adapter.itemClickListener = object: FriendListAdapter.OnItemClickListener {
             override fun onItemClick(data: User, btn: Int) {
                 if (btn == 0) {
                     // SocialListFragment로 이동
-                    val frag = SocialListFragment()
+                    val frag = SocialListFragment(data)
                     val transaction = requireActivity().supportFragmentManager.beginTransaction()
                         .replace(R.id.frame, frag)
                     transaction.addToBackStack(null)
@@ -44,6 +49,26 @@ class SocialFragment : Fragment() {
                 }
                 else {
                     // delete friend
+                }
+            }
+        }
+
+        // Search review
+        binding.apply {
+            btnSocialSearch.setOnClickListener {
+                val search = editSocialSearch.text?.toString()
+                if (search == "") {
+                    adapter.searchItem(friendData)
+                }
+                else {
+                    if(!searchData.isEmpty())
+                        searchData.clear()
+                    for (friend in friendData) {
+                        if (friend.userName.contains(search.toString())) {
+                            searchData.add(friend)
+                        }
+                    }
+                    adapter.searchItem(searchData)
                 }
             }
         }
@@ -62,11 +87,22 @@ class SocialFragment : Fragment() {
 
     private fun addFriend() {
         // add friend
-        val builder = AlertDialog.Builder(this.context)
+        val alertDialog = AlertDialog.Builder(this.context).create()
         var view = layoutInflater.inflate(R.layout.dialog_add_friend, null)
-        builder.setView(view)
+        alertDialog.setView(view)
 
-        builder.show()
+        view.findViewById<Button>(R.id.btn_add_friend).setOnClickListener {
+            val dlgText = view.findViewById<EditText>(R.id.edit_friend_id).text.toString()
+            val id =GlobalApplication.getInstance().getValue("userId")
+            UserDB.adduserFriend(id!!,dlgText){
+
+            }
+        }
+        view.findViewById<Button>(R.id.btn_cancel).setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        alertDialog.show()
     }
 
     companion object {

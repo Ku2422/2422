@@ -3,15 +3,21 @@ package com.example.ku2422.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ku2422.Store
 import com.example.ku2422.User
 import com.example.ku2422.databinding.ListSocialBinding
 
-class FriendListAdapter(val friendLists: ArrayList<User>): RecyclerView.Adapter<FriendListAdapter.FriendListHolder>() {
+class FriendListAdapter(var friendLists: ArrayList<User>): RecyclerView.Adapter<FriendListAdapter.FriendListHolder>() {
 
     interface OnItemClickListener {
         fun onItemClick(data: User, btn: Int)
     }
     var itemClickListener: OnItemClickListener?= null
+
+    fun searchItem(newLists: ArrayList<User>) {
+        friendLists = newLists
+        notifyDataSetChanged()
+    }
 
     inner class FriendListHolder(val binding: ListSocialBinding): RecyclerView.ViewHolder(binding.root) {
         init {
