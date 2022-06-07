@@ -1,8 +1,11 @@
 package com.example.ku2422
 
 import android.content.Intent
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import com.example.ku2422.databinding.ActivityLoginBinding
@@ -17,6 +20,8 @@ import com.kakao.sdk.user.UserApiClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 class LoginActivity : AppCompatActivity() {
 
@@ -98,4 +103,5 @@ class LoginActivity : AppCompatActivity() {
             putKeyValue("userId", id)
         }
     }
+
 }

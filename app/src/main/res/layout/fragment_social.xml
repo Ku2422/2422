@@ -1,38 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:background="@color/ivory"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".SocialFragment">
+    <androidx.appcompat.widget.AppCompatButton
+            android:text="친구 추가"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp" android:id="@+id/btn_friend" android:layout_marginEnd="20dp"
+            android:backgroundTint="#50C1E9"
+            android:textColor="@color/white"
+            android:fontFamily="@font/auction_gothic"
+            android:layout_gravity="right"
+            />
     <TextView
             android:text="내 친구 검색"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/text_mypage_search"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout" android:layout_marginBottom="4dp"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.053" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="8dp" android:layout_marginStart="10dp"
             android:fontFamily="@font/auction_gothic"
-            app:layout_constraintVertical_bias="0.922"/>
+            />
 
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginBottom="30dp"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            android:id="@+id/linearLayout" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.541">
+            android:id="@+id/linearLayout">
         <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content"
-                                           android:layout_margin="16dp">
+                                           android:layout_marginVertical="16dp"
+                                           android:layout_marginHorizontal="8dp"
+        >
             <LinearLayout android:layout_width="match_parent" android:layout_height="48dp"
             >
                 <LinearLayout android:layout_width="48dp" android:layout_height="match_parent"
-                              android:background="@color/white">
+                >
                     <androidx.appcompat.widget.AppCompatButton
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -42,7 +52,6 @@
                 <EditText android:layout_width="0dp" android:layout_height="match_parent"
                           android:layout_weight="1" android:id="@+id/edit_social_search"
                           android:fontFamily="@font/auction_gothic"
-                          android:background="@color/white"
                           tools:ignore="SpeakableTextPresentCheck"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -53,14 +62,4 @@
                                                    tools:listitem="@layout/list_social"
         />
     </LinearLayout>
-    <androidx.appcompat.widget.AppCompatButton
-            android:text="친구 추가"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="16dp" android:id="@+id/btn_friend" android:layout_marginEnd="28dp"
-            android:backgroundTint="#50C1E9"
-            android:textColor="@color/white"
-            android:fontFamily="@font/auction_gothic"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-            app:layout_constraintVertical_bias="0.527"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
