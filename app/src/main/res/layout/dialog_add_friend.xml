@@ -3,29 +3,14 @@
               android:orientation="vertical"
               android:layout_gravity="center"
               android:layout_width="300dp"
-              android:layout_height="250dp">
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:layout_marginTop="20dp" android:orientation="vertical"
-                  android:layout_marginHorizontal="20dp"
-    >
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:text="저장할 이름" android:textSize="13dp"
-        />
-        <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:textSize="15dp"
-                  android:hint="저장할 이름 입력"
-                  android:layout_marginVertical="5dp"
-                  android:gravity="fill_horizontal"
-                  android:inputType="textMultiLine"
-                  android:id="@+id/edit_friend_name"
-                  android:padding="5dp" android:background="@drawable/border"
-        />
-    </LinearLayout>
+              android:background="@color/ivory"
+              android:layout_height="150dp">
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:layout_margin="20dp" android:orientation="vertical"
     >
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:text="추가할 친구의 ID" android:textSize="13dp"
+                  android:fontFamily="@font/auction_gothic"
         />
         <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:gravity="fill_horizontal"
@@ -36,22 +21,27 @@
                   android:background="@drawable/border"
                   android:layout_marginVertical="5dp"
                   android:padding="5dp"
+                  android:fontFamily="@font/auction_gothic"
         />
     </LinearLayout>
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:orientation="horizontal" android:layout_marginHorizontal="20dp"
                   android:layout_marginTop="10dp">
         <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="wrap_content" android:layout_height="match_parent"
-                android:text="SUMMIT" android:background="@color/white"
-                android:layout_marginEnd="45dp"
+                android:layout_width="0dp" android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="SUMMIT" android:background="@color/ivory"
                 android:id="@+id/btn_add_friend"
-                android:textColor="#0277BD" android:layout_gravity="start"/>
+                android:layout_marginEnd="45dp"
+                android:fontFamily="@font/auction_gothic"
+                android:textColor="#0277BD" />
         <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="wrap_content" android:layout_height="match_parent"
+                android:layout_width="0dp" android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="CANCEL" android:background="@color/ivory"
                 android:layout_marginStart="45dp"
-                android:text="CANCEL" android:background="@color/white"
                 android:id="@+id/btn_cancel"
-                android:textColor="#3C3C3C" android:layout_gravity="end"/>
+                android:fontFamily="@font/auction_gothic"
+                android:textColor="#3C3C3C" />
     </LinearLayout>
 </LinearLayout>

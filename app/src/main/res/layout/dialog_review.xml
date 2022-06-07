@@ -3,6 +3,7 @@
               android:orientation="vertical"
               android:layout_gravity="center"
               android:layout_width="300dp"
+              android:background="@color/ivory"
               android:layout_height="450dp">
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:layout_marginTop="20dp" android:orientation="vertical"
@@ -13,10 +14,12 @@
             <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                       android:text="시켰던 메뉴" android:textSize="15dp"
                       android:layout_weight="1.5"
+                      android:fontFamily="@font/auction_gothic"
             />
             <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                       android:text="가격" android:textSize="15dp"
                       android:layout_weight="1"
+                      android:fontFamily="@font/auction_gothic"
             />
         </LinearLayout>
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -31,6 +34,7 @@
                       android:id="@+id/edit_menu"
                       android:padding="5dp" android:background="@drawable/border"
                       android:layout_marginEnd="10dp"
+                      android:fontFamily="@font/auction_gothic"
             />
             <EditText android:layout_width="0dp" android:layout_height="70dp"
                       android:layout_weight="1"
@@ -41,6 +45,7 @@
                       android:inputType = "number"
                       android:id="@+id/edit_price"
                       android:padding="5dp" android:background="@drawable/border"
+                      android:fontFamily="@font/auction_gothic"
             />
         </LinearLayout>
     </LinearLayout>
@@ -49,6 +54,7 @@
     >
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:text="후기" android:textSize="15dp"
+                  android:fontFamily="@font/auction_gothic"
         />
         <EditText android:layout_width="match_parent" android:layout_height="70dp"
                   android:gravity="fill_horizontal"
@@ -58,6 +64,7 @@
                   android:inputType="textMultiLine"
                   android:layout_marginVertical="5dp"
                   android:padding="5dp" android:background="@drawable/border"
+                  android:fontFamily="@font/auction_gothic"
         />
     </LinearLayout>
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -65,6 +72,7 @@
                   android:orientation="vertical">
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:text="별점" android:textSize="15dp"
+                  android:fontFamily="@font/auction_gothic"
         />
         <RatingBar android:layout_width="wrap_content" android:layout_height="wrap_content"
                    android:stepSize="1" android:numStars="5"
@@ -76,15 +84,17 @@
                   android:layout_marginTop="30dp">
         <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="wrap_content" android:layout_height="match_parent"
-                android:text="SUMMIT" android:background="@color/white"
+                android:text="SUMMIT" android:background="@color/ivory"
                 android:id="@+id/btn_add_review"
                 android:layout_marginEnd="45dp"
+                android:fontFamily="@font/auction_gothic"
                 android:textColor="#0277BD" android:layout_gravity="start"/>
         <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="wrap_content" android:layout_height="match_parent"
                 android:layout_marginStart="45dp"
                 android:id="@+id/btn_cancel"
-                android:text="CANCEL" android:background="@color/white"
+                android:text="CANCEL" android:background="@color/ivory"
+                android:fontFamily="@font/auction_gothic"
                 android:textColor="#3C3C3C" android:layout_gravity="end"/>
     </LinearLayout>
 </LinearLayout>

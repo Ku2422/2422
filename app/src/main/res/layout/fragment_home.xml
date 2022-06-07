@@ -4,6 +4,7 @@
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
+                                                   android:background="@color/ivory"
                                                    tools:context=".HomeFragment">
 
 
@@ -13,22 +14,22 @@
             android:layout_height="wrap_content"
             android:text="위치 검색"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="28dp" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.107"/>
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.049"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/auction_gothic"
+            app:layout_constraintTop_toTopOf="parent" />
     <LinearLayout
             android:id="@+id/linearLayout"
-            android:layout_width="400dp"
-            android:layout_height="400dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingStart="20dp"
-            android:gravity="center"
             android:paddingEnd="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="120dp" app:layout_constraintHorizontal_bias="0.454"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="24dp"
-            app:layout_constraintBottom_toTopOf="@+id/button2">
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0.277" app:layout_constraintHorizontal_bias="0.0">
 
         <fragment
                 android:id="@+id/place_autocomplete_fragment"
@@ -62,12 +63,12 @@
         <!--                tools:ignore="SpeakableTextPresentCheck" />-->
         <!--        </LinearLayout>-->
 
-        <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
-                     >
+        <FrameLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        >
             <com.google.android.gms.maps.MapView
                     android:id="@+id/map"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="400dp"/>
             <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="40dp" android:layout_height="40dp"
                     android:layout_marginEnd="5dp"
@@ -79,14 +80,17 @@
         </FrameLayout>
 
     </LinearLayout>
-
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="68dp" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" android:layout_marginBottom="100dp"/>
+            android:text="리뷰 작성"
+            android:fontFamily="@font/auction_gothic"
+            android:textColor="@color/white"
+            android:background="#50C1E9"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.867"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.104"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

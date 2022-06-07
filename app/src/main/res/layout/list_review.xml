@@ -1,80 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:paddingVertical="5dp"
-              android:layout_marginVertical="5dp"
-              android:background="@drawable/border_list">
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:orientation="horizontal" android:layout_marginHorizontal="10dp"
-                  android:layout_marginVertical="5dp"
+              android:layout_height="wrap_content">
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_marginTop="4dp" android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" android:layout_marginBottom="4dp"
     >
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="vertical"
+                      android:paddingVertical="5dp"
+                      >
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="horizontal" android:layout_marginHorizontal="10dp"
+                      android:layout_marginVertical="5dp"
+        >
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="식당 이름" android:textSize="18dp"
+                      android:fontFamily="@font/auction_gothic"
+                      android:layout_marginStart="0dp"
+                      android:layout_weight="3"
+                      android:id="@+id/item_restaurant"
+                      android:gravity="start"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="match_parent"
+                       android:src="@drawable/ic_baseline_person_24"
+                       android:backgroundTint="#FF475051"
+                       android:id="@+id/item_writerImg"
+                       android:gravity="end"/>
+            <TextView android:layout_width="0dp" android:layout_height="match_parent"
+                      android:layout_weight="1"
+                      android:textSize="15dp"
+                      android:fontFamily="@font/auction_gothic"
+                      android:layout_marginStart="5dp"
+                      android:id="@+id/item_writer"
+                      android:text="작성자" android:gravity="center"
+            />
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="horizontal" android:layout_marginHorizontal="10dp"
+                      android:layout_marginVertical="5dp"
+        >
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="메뉴" android:textSize="14dp"
+                      android:fontFamily="@font/auction_gothic"
+                      android:layout_marginStart="15dp" android:layout_weight="1.5"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="가격" android:textSize="14dp"
+                      android:layout_marginStart="50dp"
+                      android:fontFamily="@font/auction_gothic"
+                      android:layout_weight="0.5"/>
+            <RatingBar android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:layout_marginEnd="10dp"
+                       android:numStars="5" android:rating="4"
+                       android:stepSize="1"
+                       android:id="@+id/item_rating"
+                       style="@style/Widget.AppCompat.RatingBar.Small"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="horizontal">
+            <TextView android:layout_width="match_parent" android:layout_height="42dp"
+                      android:textSize="14dp"
+                      android:id="@+id/item_menu"
+                      android:layout_weight="1"
+                      android:paddingHorizontal="5dp"
+                      android:fontFamily="@font/auction_gothic"
+                      android:layout_marginStart="15dp"/>
+            <TextView android:layout_width="match_parent" android:layout_height="42dp"
+                      android:textSize="14dp"
+                      android:id="@+id/item_price"
+                      android:paddingHorizontal="5dp"
+                      android:layout_weight="1.1"
+                      android:layout_marginStart="10dp"
+                      android:fontFamily="@font/auction_gothic"
+                      android:layout_marginEnd="15dp"/>
+        </LinearLayout>
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:text="식당 이름" android:textSize="18dp"
-                  android:layout_marginStart="0dp"
-                  android:layout_weight="3"
-                  android:id="@+id/item_restaurant"
-                  android:gravity="start"/>
-        <ImageView android:layout_width="wrap_content" android:layout_height="match_parent"
-                   android:background="@drawable/border"
-                   android:src="@drawable/ic_baseline_person_24"
-                   android:backgroundTint="#FF475051"
-                   android:id="@+id/item_writerImg"
-                   android:gravity="end"/>
-        <TextView android:layout_width="0dp" android:layout_height="match_parent"
-                  android:layout_weight="1"
-                  android:textSize="15dp"
-                  android:layout_marginStart="5dp"
-                  android:id="@+id/item_writer"
-                  android:text="작성자" android:background="@drawable/border" android:gravity="center"
-        />
-    </LinearLayout>
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:orientation="horizontal" android:layout_marginHorizontal="10dp"
+                  android:text="후기" android:textSize="14dp"
+                  android:fontFamily="@font/auction_gothic"
+                  android:layout_marginStart="25dp" android:layout_marginVertical="5dp"/>
+        <TextView android:layout_width="match_parent" android:layout_height="42dp"
+                  android:id="@+id/item_review"
+                  android:textSize="14dp"
+                  android:paddingHorizontal="5dp"
+                  android:fontFamily="@font/auction_gothic"
+                  android:layout_marginHorizontal="15dp"/>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:text="2022/02/22" android:layout_marginHorizontal="15dp"
                   android:layout_marginVertical="5dp"
-    >
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:text="메뉴" android:textSize="14dp"
-                  android:layout_marginStart="15dp" android:layout_weight="1.5"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:text="가격" android:textSize="14dp"
-                  android:layout_marginStart="50dp"
-                  android:layout_weight="0.5"/>
-        <RatingBar android:layout_width="wrap_content" android:layout_height="wrap_content"
-                   android:layout_marginEnd="10dp"
-                   android:numStars="5" android:rating="4"
-                   android:stepSize="1"
-                   android:id="@+id/item_rating"
-                   style="@style/Widget.AppCompat.RatingBar.Small"/>
-    </LinearLayout>
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:orientation="horizontal">
-        <TextView android:layout_width="match_parent" android:layout_height="42dp"
-                  android:background="@drawable/border" android:textSize="14dp"
-                  android:id="@+id/item_menu"
-                  android:layout_weight="1.5"
-                  android:paddingHorizontal="5dp"
-                  android:layout_marginStart="15dp"/>
-        <TextView android:layout_width="match_parent" android:layout_height="42dp"
-                  android:background="@drawable/border" android:textSize="14dp"
-                  android:id="@+id/item_price"
-                  android:paddingHorizontal="5dp"
-                  android:layout_weight="1.8"
-                  android:layout_marginStart="10dp"
-                  android:layout_marginEnd="15dp"/>
-    </LinearLayout>
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:text="후기" android:textSize="14dp"
-              android:layout_marginStart="25dp" android:layout_marginVertical="5dp"/>
-    <TextView android:layout_width="match_parent" android:layout_height="42dp"
-              android:id="@+id/item_review"
-              android:background="@drawable/border" android:textSize="14dp"
-              android:paddingHorizontal="5dp"
-              android:layout_marginHorizontal="15dp"/>
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-              android:text="2022/02/22" android:layout_marginHorizontal="15dp"
-              android:layout_marginVertical="5dp"
-              android:id="@+id/item_date"
-              android:gravity="end" android:textSize="14dp"/>
+                  android:id="@+id/item_date"
+                  android:fontFamily="@font/auction_gothic"
+                  android:gravity="end" android:textSize="14dp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>

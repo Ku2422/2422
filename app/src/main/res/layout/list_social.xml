@@ -1,43 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
-              android:background="@drawable/border"
-              android:layout_margin="5dp"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
-    <ImageView android:layout_width="0dp" android:layout_height="match_parent"
-               android:layout_weight="1"
-               android:id="@+id/friend_img"
-               android:src="@drawable/ic_baseline_person_24"
-               android:background="@drawable/border_img"
-    />
-    <LinearLayout android:layout_width="0dp" android:layout_height="match_parent"
-                  android:layout_weight="4" android:orientation="vertical"
-                  android:layout_margin="10dp"
+    <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginVertical="4dp" android:layout_marginHorizontal="8dp"
     >
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:text="친구 이름" android:id="@+id/friend_name"
-                  android:textSize="25dp"
-        />
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:textSize="16dp"
-                  android:text="총 리뷰 수 : " android:id="@+id/friend_total"
-        />
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:layout_marginVertical="10dp"
-                      android:orientation="horizontal" android:layout_marginHorizontal="5dp">
-            <androidx.appcompat.widget.AppCompatButton android:layout_width="0dp" android:layout_height="40dp"
-                                                       android:textSize="12dp" android:layout_marginHorizontal="20dp"
-                                                       android:backgroundTint="#03A9F4"
-                                                       android:textColor="@color/white"
-                                                       android:id="@+id/btn_list_friend"
-                                                       android:layout_weight="1" android:text="맛집 리스트 보기"/>
-            <androidx.appcompat.widget.AppCompatButton android:layout_width="0dp" android:layout_height="40dp"
-                                                       android:backgroundTint="#3C3C3C"
-                                                       android:textColor="@color/white"
-                                                       android:id="@+id/btn_delete_friend"
-                                                       android:textSize="12dp" android:layout_marginHorizontal="20dp"
-                                                       android:layout_weight="1" android:text="친구 삭제하기"/>
+                      android:orientation="horizontal">
+            <ImageView android:layout_width="0dp" android:layout_height="match_parent"
+                       android:layout_weight="1"
+                       android:id="@+id/friend_img"
+                       android:src="@drawable/ic_baseline_person_24"
+            />
+            <LinearLayout android:layout_width="0dp" android:layout_height="match_parent"
+                          android:layout_weight="4" android:orientation="vertical"
+                          android:layout_margin="10dp"
+            >
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="친구 이름" android:id="@+id/friend_name"
+                          android:textSize="25dp"
+                          android:fontFamily="@font/auction_gothic"
+                          android:layout_marginBottom="4dp"
+                />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:textSize="16dp"
+                          android:text="총 리뷰 수 : " android:id="@+id/friend_total"
+                          android:fontFamily="@font/auction_gothic"
+                />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                              android:layout_marginVertical="10dp"
+                              android:orientation="horizontal" android:layout_marginHorizontal="5dp">
+                    <androidx.appcompat.widget.AppCompatButton android:layout_width="0dp" android:layout_height="40dp"
+                                                               android:textSize="12dp"
+                                                               android:layout_marginEnd="20dp"
+                                                               android:backgroundTint="#50C1E9"
+                                                               android:textColor="@color/white"
+                                                               android:id="@+id/btn_list_friend"
+                                                               android:fontFamily="@font/auction_gothic"
+                                                               android:layout_weight="1.2" android:text="맛집 리스트 보기"/>
+                    <androidx.appcompat.widget.AppCompatButton android:layout_width="0dp" android:layout_height="40dp"
+                                                               android:backgroundTint="@color/gray"
+                                                               android:textColor="@color/black"
+                                                               android:id="@+id/btn_delete_friend"
+                                                               android:fontFamily="@font/auction_gothic"
+                                                               android:textSize="12dp"
+                                                               android:layout_weight="1" android:text="친구 삭제하기"/>
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>
