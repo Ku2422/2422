@@ -88,8 +88,7 @@
             android:fontFamily="@font/auction_gothic"
             android:textColor="@color/white"
             android:background="#50C1E9"
-            android:layout_gravity="right"
-            android:layout_marginEnd="20dp"
+            android:layout_gravity="center"
             android:layout_marginBottom="20dp"
             />
 
