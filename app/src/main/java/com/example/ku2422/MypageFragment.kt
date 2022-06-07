@@ -148,12 +148,34 @@ class MypageFragment : Fragment() {
 
     //예시
     private fun testGetValue() {
-        // var storeInfo = Store("2258663590","","user1","건대카페","말차라떼", 4500,"so good", 5.0,"2022.01.01", 887789f,123123f)
 
         val id =GlobalApplication.getInstance().getValue("userId")
-        UserDB.adduserFriend(id!!,"2258618761"){
+
+        StoreDB.getStoreById(id!!){
+            Log.e(TAG, "testGetValue: ${it[0].storeName +" "+it[0].price +" "
+                    +it[1].storeName + " " + it[1].price}" )
 
         }
+//        val StoreInfo = Store(id!!,"sdfsdfsdf.jpg","윤혁","왕소구이",
+//            "간장불백",7000,"구구구ㅜㄱ구ㅜㅅ",5.0, "2022-06-07",
+//            233334f,2323232111f)
+//        StoreDB.insertStore(StoreInfo){
+//
+//        }
+//        UserDB.getFriendList(id!!){
+//            friendId = it[1]
+//            Log.e(TAG, "testGetValue: ${friendId}", )
+//        }
+//        UserDB.deleteUser(id!!){
+//
+//        }
+
+//        UserDB.getUserById(id!!){
+//            Log.e(TAG, "getUserById: ${it.friendId}", )
+//        }
+//        UserDB.adduserFriend(id!!,"201811222"){
+//
+//        }
 //        Log.i(TAG, "testGetValue: $id")
 
 //        var storeInfo = Store("2258663590","말차라떼",4000,"쏘굿굿굿굿",5.0,887789f,123123f)

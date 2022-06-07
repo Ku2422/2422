@@ -32,6 +32,24 @@ object UserDB {
         })
     }
 
+    //친구 정보 가져오기기
+    fun getFriendList(userId:String,complition: (listOfFriend: ArrayList<String>) -> Unit){
+        var friendList : ArrayList<String> = arrayListOf()
+        val friendRdb = userRdb.child(userId).child("friendId")
+        friendRdb.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("UserDB", "onCancelled : getFriendList ", )
+            }
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(data in snapshot.children){
+                    friendList.add(data.value.toString())
+                }
+                complition(friendList)
+            }
+        })
+    }
+
+
     //친구추가
     fun adduserFriend(userId:String ,friendId: String,complition:(flag : Boolean)->Unit){
         var friendcount = 0
@@ -58,7 +76,16 @@ object UserDB {
     }
 
     fun deleteUser(userId: String,complition:(flag : Boolean)->Unit){
-        userRdb.child(userId).setValue("").addOnCompleteListener {
+        userRdb.child(userId).setValue(null).addOnCompleteListener {
+            complition(true)
+        }.addOnFailureListener {
+            complition(false)
+        }
+    }
+
+
+    fun deleteFriend(userId:String , friendId:String,complition: (flag: Boolean) -> Unit){
+        userRdb.child(userId).child("friendId").child(friendId).setValue(null).addOnCompleteListener {
             complition(true)
         }.addOnFailureListener {
             complition(false)
