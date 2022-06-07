@@ -31,9 +31,14 @@
                   android:padding="5dp" android:background="@drawable/border"
         />
     </LinearLayout>
-    <fragment
-            android:layout_width="match_parent" android:layout_height="400dp"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:id="@+id/map"/>
+<!--    <fragment-->
+<!--            android:layout_width="match_parent" android:layout_height="400dp"-->
+<!--            android:name="com.google.android.gms.maps.SupportMapFragment"-->
+<!--            android:id="@+id/map"/>-->
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/map2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
