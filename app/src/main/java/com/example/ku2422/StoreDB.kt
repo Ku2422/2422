@@ -12,22 +12,33 @@ object StoreDB {
     val storeRdb: DatabaseReference = Firebase.database.getReference("StoreDB")
 
     //가게 정보 가져오기
-    fun getStoreById(id: String,completion: (store : Store) -> Unit) {
-
+    fun getStoreById(id: String,completion: (listOfStore : ArrayList<Store>) -> Unit) {
+        var storeList:ArrayList<Store> = arrayListOf()
         val getStoreRdb =storeRdb.child(id)
-        getStoreRdb.addValueEventListener(object : ValueEventListener {
+        getStoreRdb.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 Log.e("storeDB", "onCancelled : getStoreById")
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                //성공시
+
                 for (data in snapshot.children) {
-                    val curStore = data.getValue(Store::class.java)
-                    curStore?.let {
-                        completion(it)
-                    }
+                    storeList.add(Store(
+                        data.child("userId").value.toString(),
+                        data.child("userImg").value.toString(),
+                        data.child("userName").value.toString(),
+                        data.child("storeName").value.toString(),
+                        data.child("menu").value.toString(),
+                        data.child("price").value.toString().toInt(),
+                        data.child("review").value.toString(),
+                        data.child("star").value.toString().toDouble(),
+                        data.child("data").value.toString(),
+                        data.child("locationX").value.toString().toFloat(),
+                        data.child("locationY").value.toString().toFloat()
+                    ))
                 }
+
+                completion(storeList)
             }
         })
     }
@@ -59,7 +70,7 @@ object StoreDB {
 
     //가게 정보 삭제
     fun deleteStore(userId : String,completion: (flag: Boolean) -> Unit){
-        storeRdb.child(userId).setValue("").addOnCompleteListener {
+        storeRdb.child(userId).setValue(null).addOnCompleteListener {
             completion(true)
         }.addOnFailureListener {
             completion(false)
