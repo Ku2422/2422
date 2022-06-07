@@ -6,6 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="@color/ivory"
         tools:context=".MainActivity" >
     <FrameLayout android:layout_width="match_parent" android:layout_height="0dp"
                  android:layout_weight="1"
@@ -16,7 +17,7 @@
             android:layout_gravity="bottom"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_menu"
-            android:background="#009688"
+            android:background="#08ffc8"
             app:itemIconTint="@drawable/color_check"
             app:itemTextColor="@drawable/color_check"
             android:id="@+id/bottom_menu"/>

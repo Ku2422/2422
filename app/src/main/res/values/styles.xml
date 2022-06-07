@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.BottomNavigationView"
+           parent="@style/Widget.Design.BottomNavigationView">
+        <item name="android:fontFamily">@font/auction_gothic</item>
+    </style>
+</resources>
