@@ -32,7 +32,7 @@
                               android:layout_marginVertical="10dp"
                               android:orientation="horizontal" android:layout_marginHorizontal="5dp">
                     <androidx.appcompat.widget.AppCompatButton android:layout_width="0dp" android:layout_height="40dp"
-                                                               android:textSize="12dp"
+                                                               android:textSize="10dp"
                                                                android:layout_marginEnd="20dp"
                                                                android:backgroundTint="#50C1E9"
                                                                android:textColor="@color/white"
@@ -44,7 +44,7 @@
                                                                android:textColor="@color/black"
                                                                android:id="@+id/btn_delete_friend"
                                                                android:fontFamily="@font/auction_gothic"
-                                                               android:textSize="12dp"
+                                                               android:textSize="10dp"
                                                                android:layout_weight="1" android:text="친구 삭제하기"/>
                 </LinearLayout>
             </LinearLayout>

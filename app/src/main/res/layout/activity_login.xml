@@ -12,9 +12,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/auction_gothic"
-            android:text="카카오 로그인"
+            android:text="오늘 뭐 먹었게?"
             android:textSize="40dp"
-            android:layout_marginBottom="100dp"
+            android:layout_marginTop="100dp"
             android:gravity="center"/>
     <ImageView
         android:id="@+id/loginBtn"
@@ -22,7 +22,14 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/auction_gothic"
         android:layout_marginTop="100dp"
+        android:layout_marginHorizontal="30dp"
         android:src="@drawable/kakao_login_large_wide"/>
 
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:text="카카오 로그인을 통해 시작하기"
+              android:textSize="20dp"
+              android:gravity="center"
+              android:fontFamily="@font/auction_gothic"
+              android:textColor="#50C1E9"/>
 
 </LinearLayout>
