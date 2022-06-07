@@ -1,5 +1,6 @@
 package com.example.ku2422
 
+import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -16,7 +17,7 @@ object StoreDB {
         val getStoreRdb =storeRdb.child(id)
         getStoreRdb.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
-                //실패는 없습니다.
+                Log.e("storeDB", "onCancelled : getStoreById")
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -38,7 +39,7 @@ object StoreDB {
         val getStoreRdb =storeRdb.child(store.userId)
         getStoreRdb.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
-                //실패는 없습니다.
+                Log.e("storeDB", "onCancelled : insertStore ")
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {

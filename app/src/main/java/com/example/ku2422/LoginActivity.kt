@@ -20,6 +20,7 @@ import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
 
+
     companion object {
         const val TAG = "LoginActivity"
     }
@@ -60,28 +61,41 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun insertUserInfo(){
+        var user_id = ""
         UserApiClient.instance.me{ user,error->
+            user_id = user?.id.toString()
+            setSharedPreference(user_id)
             user?.properties?.entries?.forEach {
 
 
-                userRdb.addValueEventListener(object : ValueEventListener {
+                userRdb.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(error: DatabaseError) {
-
+                        Log.e(TAG, "onCancelled: insertUserInfo", )
                     }
-
                     override fun onDataChange(snapshot: DataSnapshot) {
+                        var flag =false
                         for (data in snapshot.children) {
                             val curUser = data.getValue(User::class.java)
                             curUser?.let {userit ->
-                                if (userit.userId != user?.id.toString()) {
-                                    val userinfo = User(user?.id.toString(),it.value)
-                                    userRdb.child(user?.id.toString()).setValue(userinfo)
+                                if (userit.userId == user?.id.toString()) {
+                                    flag = true
                                 }
                             }
+                        }
+                        if(!flag){
+                            val userinfo = User(user?.id.toString(),it.value)
+                            userRdb.child(user?.id.toString()).setValue(userinfo)
                         }
                     }
                 })
             }
+        }
+    }
+
+    private fun setSharedPreference(id: String){
+
+        GlobalApplication.getInstance().run {
+            putKeyValue("userId", id)
         }
     }
 }
