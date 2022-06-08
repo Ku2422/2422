@@ -32,7 +32,7 @@ object StoreDB {
                         data.child("price").value.toString().toInt(),
                         data.child("review").value.toString(),
                         data.child("star").value.toString().toDouble(),
-                        data.child("data").value.toString(),
+                        data.child("date").value.toString(),
                         data.child("locationX").value.toString().toFloat(),
                         data.child("locationY").value.toString().toFloat()
                     ))

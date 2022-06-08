@@ -53,16 +53,15 @@ class MypageFragment : Fragment() {
         userId = GlobalApplication.getInstance().getValue("userId")!!
         Log.i("userId", userId)
 
-        StoreDB.getStoreById(userId){
-//                for (review in it!!){
-//                    reviewData.add(review)
-//                }
+        adapter = ReviewListAdapter(reviewData)
+
+        StoreDB.getStoreById(userId) {
             reviewData = it
+            adapter.searchItem(it)
             Log.i("StoreDB", it.toString())
             Log.i("reviewData", reviewData.toString())
         }
 
-        adapter = ReviewListAdapter(reviewData)
 
         // To more review
         adapter.itemClickListener = object: ReviewListAdapter.OnItemClickListener {

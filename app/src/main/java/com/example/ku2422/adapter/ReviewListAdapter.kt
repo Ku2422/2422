@@ -36,6 +36,8 @@ class ReviewListAdapter(var reviewLists: ArrayList<Store>): RecyclerView.Adapter
         notifyDataSetChanged()
     }
 
+//    fun updateItem()
+
     inner class ReviewListHolder(val binding: ListReviewBinding): RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener {
