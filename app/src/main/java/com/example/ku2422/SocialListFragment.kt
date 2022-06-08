@@ -38,7 +38,7 @@ class SocialListFragment(val data: User) : Fragment() {
             9000,"good", 5.0,"2022-02-15", 887789f,123123f)) //temp
 
 
-        adapter = ReviewListAdapter(reviewData)
+        adapter = ReviewListAdapter(reviewData,0f,0f,false)
 
         binding.recyclerReview.adapter = adapter
 
