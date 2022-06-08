@@ -19,7 +19,7 @@ object UserDB {
     val userRdb: DatabaseReference = Firebase.database.getReference("UserDB")
 
     fun getUserById(id: String,completion:(user: User)->Unit) {
-        userRdb.addValueEventListener(object : ValueEventListener {
+        userRdb.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 Log.e("UserDB", "onCancelled : getUserById")
             }

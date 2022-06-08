@@ -41,8 +41,10 @@ class MypageFragment : Fragment() {
     companion object{
         const val TAG = "MypageFragment"
 
-        fun newInstance() : MypageFragment {
-            return MypageFragment()
+        var INSTANCE : MypageFragment? = null
+        fun getInstance() = INSTANCE?: MypageFragment().also {
+            INSTANCE = it
+            it
         }
     }
 

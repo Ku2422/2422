@@ -1,7 +1,6 @@
 package com.example.ku2422
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,29 +10,27 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ku2422.adapter.FriendListAdapter
-import com.example.ku2422.adapter.ReviewListAdapter
-import com.example.ku2422.databinding.DialogAddFriendBinding
-import com.example.ku2422.databinding.FragmentMypageBinding
 import com.example.ku2422.databinding.FragmentSocialBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 
 class SocialFragment : Fragment() {
+
+    companion object{
+        var INSTANCE : SocialFragment? = null
+        fun getInstance() = INSTANCE?: SocialFragment().also {
+            INSTANCE = it
+            it
+        }
+    }
     private lateinit var binding: FragmentSocialBinding
     private lateinit var adapter: FriendListAdapter
     private lateinit var layoutManager: RecyclerView.LayoutManager
     var friendData: ArrayList<User> = ArrayList()
     var searchData: ArrayList<User> = ArrayList()
-
-    val scope = CoroutineScope(Dispatchers.IO)
     var friendId: ArrayList<String> = arrayListOf()
     val mainViewModel: MainViewModel by activityViewModels()
 
@@ -47,13 +44,6 @@ class SocialFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentSocialBinding.inflate(inflater, container, false)
 
-
-
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         getFriendID()
 
         setMainViewModelProperties()
@@ -61,7 +51,15 @@ class SocialFragment : Fragment() {
 
 
 
+        return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mainViewModel.friendUserInfoList.clear()
+
+    }
+
 
     private fun initLayoutProperties() {
         // Search review
@@ -89,17 +87,17 @@ class SocialFragment : Fragment() {
 
     private fun setMainViewModelProperties() {
         mainViewModel.run {
-            friendId.observe(viewLifecycleOwner){ friendIdUpdated ->
+            friendIdListLiveData.observe(this@SocialFragment){ friendIdUpdated ->
                 this@SocialFragment.friendId = friendIdUpdated
                 getFriendInfo(this@SocialFragment.friendId)
             }
-            friendInfo.observe(viewLifecycleOwner) {
+            friendInfoLiveData.observe(this@SocialFragment) {
                 friendUserInfoList.add(it)
-                friendInfoList.value = friendUserInfoList
+                friendInfoListLiveData.value = friendUserInfoList
             }
-            friendInfoList.observe(viewLifecycleOwner){
+            friendInfoListLiveData.observe(this@SocialFragment){
                 if (it.size == this@SocialFragment.friendId.size){
-                    adapter = FriendListAdapter(it)
+                    adapter = FriendListAdapter(it.clone() as ArrayList<User>)
                     adapter.itemClickListener = object : FriendListAdapter.OnItemClickListener {
                         override fun onItemClick(data: User, btn: Int) {
                             if (btn == 0) {
@@ -121,13 +119,13 @@ class SocialFragment : Fragment() {
                         recyclerSocial.layoutManager =
                             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                     }
+                    //adapter.notifyDataSetChanged()
                 }else{
-                    Log.e("tq", "onViewCreated: 몇개? : ${it}", )
+                    Log.e("SocialFragment", "onViewCreated: 몇개? : ${it}", )
                 }
             }
         }
     }
-
     private fun addFriend() {
         // add friend
         val alertDialog = AlertDialog.Builder(this.context).create()
@@ -150,14 +148,9 @@ class SocialFragment : Fragment() {
 
     private fun getFriendID() {
         val id = GlobalApplication.getInstance().getValue("userId")
-        var friendInfo: ArrayList<String> = arrayListOf()
 
-        mainViewModel.getFriendId(id!!)
-    }
-
-    companion object {
-        fun newInstance(): SocialFragment {
-            return SocialFragment()
+        if (mainViewModel.friendIdListLiveData.value == null) {
+            mainViewModel.getFriendId(id!!)
         }
     }
 
