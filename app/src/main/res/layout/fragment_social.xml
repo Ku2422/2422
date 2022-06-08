@@ -17,14 +17,6 @@
             android:fontFamily="@font/auction_gothic"
             android:layout_gravity="right"
             />
-    <TextView
-            android:text="내 친구 검색"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/text_mypage_search"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:layout_marginBottom="8dp" android:layout_marginStart="10dp"
-            android:fontFamily="@font/auction_gothic"
-            />
 
     <LinearLayout
             android:orientation="vertical"
@@ -52,6 +44,7 @@
                 <EditText android:layout_width="0dp" android:layout_height="match_parent"
                           android:layout_weight="1" android:id="@+id/edit_social_search"
                           android:fontFamily="@font/auction_gothic"
+                          android:hint="내 친구 검색"
                           tools:ignore="SpeakableTextPresentCheck"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
