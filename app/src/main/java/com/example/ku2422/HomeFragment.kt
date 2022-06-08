@@ -173,6 +173,7 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
 
 
 
+        autocompleteFragment!!.setHint("위치 검색")
         autocompleteFragment!!.setPlaceFields(
             listOf(
                 com.google.android.libraries.places.api.model.Place.Field.ID,

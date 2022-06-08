@@ -9,16 +9,6 @@
               tools:context=".HomeFragment">
 
 
-    <TextView
-            android:id="@+id/text_home_locate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="위치 검색"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/auction_gothic"
-    />
     <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
