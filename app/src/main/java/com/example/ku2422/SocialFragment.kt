@@ -3,6 +3,7 @@ package com.example.ku2422
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,9 @@ import com.example.ku2422.adapter.ReviewListAdapter
 import com.example.ku2422.databinding.DialogAddFriendBinding
 import com.example.ku2422.databinding.FragmentMypageBinding
 import com.example.ku2422.databinding.FragmentSocialBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class SocialFragment : Fragment() {
@@ -24,6 +28,9 @@ class SocialFragment : Fragment() {
     private lateinit var layoutManager: RecyclerView.LayoutManager
     var friendData: ArrayList<User> = ArrayList()
     var searchData: ArrayList<User> = ArrayList()
+
+    val scope = CoroutineScope(Dispatchers.IO)
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -103,6 +110,29 @@ class SocialFragment : Fragment() {
         }
 
         alertDialog.show()
+    }
+
+    private fun getFriend(){
+        val id =GlobalApplication.getInstance().getValue("userId")
+        var friendInfo:ArrayList<String> = arrayListOf()
+        var flag = false
+
+        scope.launch {
+            UserDB.getFriendList(id!!){
+                for(i in 0 until it.size){
+                    friendInfo.add(it[i])
+                }
+                flag = true
+            }
+        }
+
+        scope.launch {
+            while(!flag){ }
+
+            if(flag){
+                Log.e("SocialFragment", "getFriend : ${friendInfo}", )
+            }
+        }
     }
 
     companion object {
