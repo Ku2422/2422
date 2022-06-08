@@ -6,16 +6,6 @@
         android:layout_height="match_parent" android:background="@color/ivory"
         android:orientation="vertical"
         tools:context=".SocialListFragment">
-    <TextView
-            android:text="친구 이름의 리뷰 검색"
-            android:layout_width="wrap_content"
-            android:fontFamily="@font/auction_gothic"
-            android:layout_height="wrap_content" android:id="@+id/text_friend_title"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-    />
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -42,8 +32,9 @@
                             android:id="@+id/btn_social_list_search"/>
                 </LinearLayout>
                 <EditText android:layout_width="0dp" android:layout_height="match_parent"
-                          android:layout_weight="3" android:id="@+id/edit_friend_search"
+                          android:layout_weight="2.5" android:id="@+id/edit_friend_search"
                           android:fontFamily="@font/auction_gothic"
+                          android:hint="친구 이름의 리뷰 검색"
                           tools:ignore="SpeakableTextPresentCheck"/>
                 <Spinner android:layout_width="0dp" android:layout_height="wrap_content"
                          android:layout_weight="1"

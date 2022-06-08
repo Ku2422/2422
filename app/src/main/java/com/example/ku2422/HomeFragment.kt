@@ -1,6 +1,5 @@
 package com.example.ku2422
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Context.LOCATION_SERVICE
@@ -17,18 +16,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.findFragment
+import androidx.fragment.app.setFragmentResult
 import com.google.android.gms.common.api.Status
-import com.google.android.gms.fitness.data.Field
 import com.google.android.gms.location.*
-import com.google.android.gms.maps.*
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
@@ -75,6 +76,13 @@ class HomeFragment : Fragment(), OnMapReadyCallback, PlacesListener,
         mainActivity = context as MainActivity
 
     }
+
+
+    override fun onDetach() {
+        super.onDetach()
+
+    }
+
 
     var checkStore = false
     var check = true
@@ -181,6 +189,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback, PlacesListener,
 
 
 
+        autocompleteFragment!!.setHint("위치 검색")
         autocompleteFragment!!.setPlaceFields(
             listOf(
                 com.google.android.libraries.places.api.model.Place.Field.ID,
@@ -382,6 +391,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback, PlacesListener,
                     locationR.locations[locationR.locations.size - 1].latitude,
                     locationR.locations[locationR.locations.size - 1].longitude
                 )
+                mainActivity.lat = locGps.latitude.toFloat()
+                mainActivity.lng = locGps.longitude.toFloat()
+                mainActivity.check = true
             }
         }
     }
@@ -423,7 +435,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback, PlacesListener,
             }
         }
     }
+    fun returnGPS(){
 
+    }
     //LifeCycle
     override fun onStart() {
         super.onStart()
@@ -446,11 +460,14 @@ class HomeFragment : Fragment(), OnMapReadyCallback, PlacesListener,
         super.onPause()
         mView.onPause()
         stopLocationUpdate()
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
         mView.onDestroy()
+
+
     }
 
     override fun onLowMemory() {

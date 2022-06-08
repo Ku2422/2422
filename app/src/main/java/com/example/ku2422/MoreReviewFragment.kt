@@ -1,5 +1,7 @@
 package com.example.ku2422
 
+import android.location.Address
+import android.location.Geocoder
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +16,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import java.util.*
 
 
 class MoreReviewFragment(val data: Store) : Fragment(), OnMapReadyCallback,GoogleMap.OnMarkerClickListener{
@@ -29,12 +32,15 @@ class MoreReviewFragment(val data: Store) : Fragment(), OnMapReadyCallback,Googl
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentMoreReviewBinding.inflate(inflater, container, false)
+        val geoCoder = Geocoder(this.context,Locale.getDefault())
 
         mView = binding!!.map2
         mView.onCreate(savedInstanceState)
         mView.getMapAsync(this)
+        var tempLoc = geoCoder.getFromLocation(data.locationX.toDouble(),data.locationY.toDouble(),1)
+        var addr : Address = tempLoc.get(0)
+        binding!!.itemLocate.text =addr.getAddressLine(0).toString()
 
-        binding!!.itemLocate.text = data.locationX.toString()
         binding!!.itemReview.text = data.review
 
         return binding!!.root
@@ -63,7 +69,7 @@ class MoreReviewFragment(val data: Store) : Fragment(), OnMapReadyCallback,Googl
         val option = MarkerOptions()
         option.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
         option.position(tmpLoc)
-        option.title("가게이름")//가게이름 연결필요
+        option.title(data.storeName)//가게이름 연결필요
         google.addMarker(option)
     }
 

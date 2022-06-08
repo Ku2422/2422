@@ -1,12 +1,16 @@
 package com.example.ku2422.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ku2422.Store
 import com.example.ku2422.databinding.ListReviewBinding
+import com.google.android.gms.maps.model.LatLng
+import kotlin.math.pow
+import kotlin.math.sqrt
 
-class ReviewListAdapter(var reviewLists: ArrayList<Store>): RecyclerView.Adapter<ReviewListAdapter.ReviewListHolder>() {
+class ReviewListAdapter(var reviewLists: ArrayList<Store>,var lat : Float,var lng : Float, var check : Boolean): RecyclerView.Adapter<ReviewListAdapter.ReviewListHolder>() {
 
     interface OnItemClickListener {
         fun onItemClick(data: Store)
@@ -25,7 +29,11 @@ class ReviewListAdapter(var reviewLists: ArrayList<Store>): RecyclerView.Adapter
                 notifyDataSetChanged()
             }
             2-> {
-                // 거리순
+                if(check){
+                    reviewLists = ArrayList(reviewLists.sortedBy { sqrt((it.locationX - lat).pow(2) +  (it.locationY - lng).pow(2)) })
+                    notifyDataSetChanged()
+                }
+
             }
         }
 
@@ -60,6 +68,9 @@ class ReviewListAdapter(var reviewLists: ArrayList<Store>): RecyclerView.Adapter
         holder.binding.itemPrice.text = reviewLists[position].price.toString()
         holder.binding.itemReview.text = reviewLists[position].review
         holder.binding.itemDate.text = reviewLists[position].date
+
+
+
     }
 
     override fun getItemCount(): Int {
