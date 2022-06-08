@@ -14,6 +14,9 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
 class MainActivity : AppCompatActivity(){
+    var lat : Float = 0f
+    var lng : Float = 0f
+    var check = false
     companion object{
         const val TAG = "MainActivity"
     }
@@ -41,19 +44,24 @@ class MainActivity : AppCompatActivity(){
 
 
         bn.setOnItemSelectedListener {
-            replaceFragment(
+
                 when(it.itemId){
-                    R.id.home -> HomeFragment()
-                    R.id.mypage -> MypageFragment()
-                    else -> SocialFragment()
+                    R.id.home -> replaceFragment(HomeFragment())
+                    R.id.mypage ->replaceFragment(MypageFragment())
+                    else -> replaceFragment(SocialFragment())
                 }
-            )
             true
         }
 
     }
 
     private fun replaceFragment(fragment: Fragment){
+        var bundle = Bundle()
+        bundle.putFloat("lat",lat)
+        bundle.putFloat("lng",lng)
+        bundle.putBoolean("check",check)
+        fragment.arguments = bundle
+
         supportFragmentManager.beginTransaction().replace(fl.id, fragment).commit()
     }
 
