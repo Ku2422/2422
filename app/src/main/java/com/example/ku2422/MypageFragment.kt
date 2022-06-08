@@ -34,6 +34,9 @@ class MypageFragment : Fragment() {
     var reviewData: ArrayList<Store> = ArrayList()
     var searchData: ArrayList<Store> = ArrayList()
     var data = mutableListOf<Store>()
+    var lat = 0f
+    var lng = 0f
+    var check = false
 
     companion object{
         const val TAG = "MypageFragment"
@@ -53,7 +56,11 @@ class MypageFragment : Fragment() {
         userId = GlobalApplication.getInstance().getValue("userId")!!
         Log.i("userId", userId)
 
-        adapter = ReviewListAdapter(reviewData)
+        check = requireArguments().getBoolean("check")
+        lat = requireArguments().getFloat("lat")
+        lng = requireArguments().getFloat("lng")
+
+        adapter = ReviewListAdapter(reviewData,lat,lng,check)
 
         StoreDB.getStoreById(userId) {
             reviewData = it
