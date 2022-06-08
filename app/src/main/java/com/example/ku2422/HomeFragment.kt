@@ -44,16 +44,28 @@ import kotlinx.coroutines.launch
 import noman.googleplaces.*
 import java.text.SimpleDateFormat
 
-class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnMarkerClickListener  {
+class HomeFragment : Fragment(), OnMapReadyCallback, PlacesListener,
+    GoogleMap.OnMarkerClickListener {
+
+    companion object {
+
+        var INSTANCE: HomeFragment? = null
+        fun getInstance() = INSTANCE ?: HomeFragment().also {
+            INSTANCE = it
+            it
+
+        }
+    }
 
     val dataFormat1 = SimpleDateFormat("yyyy-MM-dd") // 년 월 일
 
     var scope = CoroutineScope(Dispatchers.Main)
-    lateinit var UID : String
-    lateinit var UNAME : String
+    lateinit var UID: String
+    lateinit var UNAME: String
+
     //마커 클릭시 정보 저장
-    lateinit var markerName : String
-    lateinit var markerLoc : LatLng
+    lateinit var markerName: String
+    lateinit var markerLoc: LatLng
 
     //mainactivity 저장
     lateinit var mainActivity: MainActivity
@@ -63,6 +75,7 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
         mainActivity = context as MainActivity
 
     }
+
     var checkStore = false
     var check = true
     //GOOGLEMAP
@@ -76,7 +89,7 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
         android.Manifest.permission.ACCESS_COARSE_LOCATION
     )
 
-    var locGps = LatLng(37.2892313,126.8164737)
+    var locGps = LatLng(37.2892313, 126.8164737)
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     lateinit var locationRequest: LocationRequest
     lateinit var locationRequest2: LocationRequest
@@ -87,18 +100,17 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
     var placesClient: PlacesClient? = null
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
         var rootView = inflater.inflate(R.layout.fragment_home, container, false)
-        lateinit var UID : String
-        lateinit var UNAME : String
+        lateinit var UID: String
+        lateinit var UNAME: String
         markerName = ""
-        UID =GlobalApplication.getInstance().getValue("userId")!!
-        UserApiClient.instance.me{ user, error->
+        UID = GlobalApplication.getInstance().getValue("userId")!!
+        UserApiClient.instance.me { user, error ->
             user?.properties?.entries?.forEach {
                 UNAME = it.value
             }
@@ -115,10 +127,9 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
 
         btn.setOnClickListener {
             //GPS 버튼 생성 후 현재 위치 부르는 용도
-            if(check) {
+            if (check) {
                 setMaptoGPS(locGps)
-            }
-            else
+            } else
                 showGPSSetting()
 
         }
@@ -150,19 +161,23 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
             if (checkStore) {
                 dialog.showDlg()
                 checkStore = false
-            }else{
-                Toast.makeText(mainActivity,"가게를 선택해주세요",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(mainActivity, "가게를 선택해주세요", Toast.LENGTH_SHORT).show()
             }
         }
 
         //GPS 세팅
 
         //구글 맵 검색 창
-        if(!Places.isInitialized()) {
-            Places.initialize(mainActivity.applicationContext,"AIzaSyB3XIBu35OK_npiXVicBiXfV6ge-NEta24")
+        if (!Places.isInitialized()) {
+            Places.initialize(
+                mainActivity.applicationContext,
+                "AIzaSyB3XIBu35OK_npiXVicBiXfV6ge-NEta24"
+            )
         }
         placesClient = Places.createClient(mainActivity)
-        val autocompleteFragment = childFragmentManager.findFragmentById(R.id.place_autocomplete_fragment)as AutocompleteSupportFragment?
+        val autocompleteFragment =
+            childFragmentManager.findFragmentById(R.id.place_autocomplete_fragment) as AutocompleteSupportFragment?
 
 
 
@@ -187,7 +202,7 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
         return rootView
     }
 
-    fun setMaptoGPS(tmpLoc : LatLng) {
+    fun setMaptoGPS(tmpLoc: LatLng) {
         //GPS 해당장소 불러서 주변에 마커찍기
         showPlaceInformation(tmpLoc)
         google.moveCamera(CameraUpdateFactory.newLatLngZoom(tmpLoc, 16.0f))
@@ -199,7 +214,7 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
         google = googleMap
         google.setOnMarkerClickListener(this)
         setMaptoGPS(locGps)
-        }
+    }
 
     //마커 클릭시 (마커관련정보 가져올수있음)
     override fun onMarkerClick(marker: Marker): Boolean {
@@ -272,6 +287,7 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
                 check = false
             }
         }
+
     //결과 받기
     @RequiresApi(Build.VERSION_CODES.N)
     val locationPermissionRequest =
@@ -422,7 +438,7 @@ class HomeFragment : Fragment(),OnMapReadyCallback,PlacesListener, GoogleMap.OnM
     override fun onResume() {
         super.onResume()
         mView.onResume()
-        if (!startupdate&&check)
+        if (!startupdate && check)
             startLocationUpdates()
     }
 

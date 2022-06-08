@@ -16,6 +16,8 @@ import java.security.NoSuchAlgorithmException
 
 class MainActivity : AppCompatActivity(){
     val mainViewModel:MainViewModel by viewModels()
+
+
     companion object{
         const val TAG = "MainActivity"
     }
@@ -38,16 +40,24 @@ class MainActivity : AppCompatActivity(){
 
     private fun inNavigation() {
 
-        supportFragmentManager.beginTransaction().add(fl.id, HomeFragment()).commit()
 
+        bn.selectedItemId = mainViewModel.selectedFragment.value!!
+        replaceFragment(
+            when(bn.selectedItemId){
+                R.id.home -> HomeFragment.getInstance()
+                R.id.mypage -> MypageFragment.getInstance()
+                else -> SocialFragment.getInstance()
+            }
+        )
 
 
         bn.setOnItemSelectedListener {
+            mainViewModel.selectedFragment.value = it.itemId
             replaceFragment(
                 when(it.itemId){
-                    R.id.home -> HomeFragment()
+                    R.id.home -> HomeFragment.getInstance()
                     R.id.mypage -> MypageFragment()
-                    else -> SocialFragment()
+                    else -> SocialFragment.getInstance()
                 }
             )
             true
