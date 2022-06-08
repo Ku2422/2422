@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Base64
 import android.util.Log
 import android.widget.FrameLayout
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.ku2422.databinding.ActivityMainBinding
@@ -14,6 +15,7 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
 class MainActivity : AppCompatActivity(){
+    val mainViewModel:MainViewModel by viewModels()
     companion object{
         const val TAG = "MainActivity"
     }
