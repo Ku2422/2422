@@ -2,7 +2,6 @@ package com.example.ku2422
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,28 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.Toast
-import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ku2422.StoreDB.getStoreById
 import com.example.ku2422.adapter.ReviewListAdapter
-import com.example.ku2422.data.LoginDataSource
-import com.example.ku2422.data.LoginRepository
-import com.example.ku2422.data.model.LoggedInUser
-import com.example.ku2422.databinding.FragmentMoreReviewBinding
 import com.example.ku2422.databinding.FragmentMypageBinding
-import com.kakao.sdk.user.UserApiClient
 
 
 class MypageFragment : Fragment() {
     private lateinit var binding: FragmentMypageBinding
     private lateinit var adapter: ReviewListAdapter
     private lateinit var layoutManager: RecyclerView.LayoutManager
-    lateinit var userManager: LoginRepository
     lateinit var userId: String
-    lateinit var currUser: User
     var reviewData: ArrayList<Store> = ArrayList()
     var searchData: ArrayList<Store> = ArrayList()
     var data = mutableListOf<Store>()
@@ -57,7 +45,6 @@ class MypageFragment : Fragment() {
         binding = FragmentMypageBinding.inflate(inflater, container, false)
 
         userId = GlobalApplication.getInstance().getValue("userId")!!
-//        userId = "2258618761"
         binding.textMyUID.text = "내 UID: "+userId
         Log.i("userId", userId)
 
@@ -70,8 +57,6 @@ class MypageFragment : Fragment() {
         StoreDB.getStoreById(userId) {
             reviewData = it
             adapter.searchItem(it)
-            Log.i("StoreDB", it.toString())
-            Log.i("reviewData", reviewData.toString())
         }
 
 
@@ -137,7 +122,6 @@ class MypageFragment : Fragment() {
                     p3: Long
                 ) {
                     adapter.sortItem(position)
-
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {

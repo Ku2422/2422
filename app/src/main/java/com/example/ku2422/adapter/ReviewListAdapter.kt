@@ -44,8 +44,6 @@ class ReviewListAdapter(var reviewLists: ArrayList<Store>,var lat : Float,var ln
         notifyDataSetChanged()
     }
 
-//    fun updateItem()
-
     inner class ReviewListHolder(val binding: ListReviewBinding): RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener {

@@ -81,7 +81,7 @@ class MoreReviewFragment(val data: Store) : Fragment(), OnMapReadyCallback,Googl
         val option = MarkerOptions()
         option.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
         option.position(tmpLoc)
-        option.title(data.storeName)//가게이름 연결필요
+        option.title(data.storeName)
         google.addMarker(option)
     }
 
