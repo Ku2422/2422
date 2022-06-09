@@ -29,15 +29,11 @@ class SocialFragment : Fragment() {
     }
     private lateinit var binding: FragmentSocialBinding
     private lateinit var adapter: FriendListAdapter
-    private lateinit var layoutManager: RecyclerView.LayoutManager
     lateinit var userId: String
     var friendData: ArrayList<User> = ArrayList()
     var searchData: ArrayList<User> = ArrayList()
     var friendId: ArrayList<String> = arrayListOf()
     val mainViewModel: MainViewModel by activityViewModels()
-
-    val friendInfoList = ArrayList<User>()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,7 +56,6 @@ class SocialFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mainViewModel.friendUserInfoList.clear()
-
     }
 
 
@@ -116,7 +111,7 @@ class SocialFragment : Fragment() {
                             } else {
                                 UserDB.deleteFriend(userId, data.userId) {
                                     if(it) {
-                                        Toast.makeText(requireContext(), data.userId+"님이 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(requireContext(), data.userName+"님이 삭제되었습니다.", Toast.LENGTH_SHORT).show()
                                         getFriendID()
                                     }
                                 }
@@ -125,13 +120,12 @@ class SocialFragment : Fragment() {
                     }
                     binding.run {
                         recyclerSocial.adapter = adapter
-//                        binding.recyclerSocial.adapter = adapter
                         recyclerSocial.layoutManager =
                             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                     }
                 }
                 else{
-                    Log.e("SocialFragment", "onViewCreated: 몇개? : ${it}", )
+//                    Log.e("SocialFragment", "onViewCreated: ${it}", )
                 }
             }
         }
@@ -166,7 +160,6 @@ class SocialFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-
     }
 
 }
