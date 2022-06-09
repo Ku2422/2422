@@ -57,6 +57,7 @@ class MypageFragment : Fragment() {
 
         userId = GlobalApplication.getInstance().getValue("userId")!!
 //        userId = "2258618761"
+        binding.textMyUID.text = "내 UID: "+userId
         Log.i("userId", userId)
 
         check = requireArguments().getBoolean("check")
