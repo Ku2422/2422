@@ -191,7 +191,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback, PlacesListener,
         if (!Places.isInitialized()) {
             Places.initialize(
                 mainActivity.applicationContext,
-                "AIzaSyB3XIBu35OK_npiXVicBiXfV6ge-NEta24"
+                "AIzaSyC_FZvqoqG9deVZK_xN6dABZn4koTLQJzQ"
             )
         }
         placesClient = Places.createClient(mainActivity)
@@ -277,8 +277,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback, PlacesListener,
         google.clear()
 
         val nrplace = NRPlaces.Builder().listener(this)
-            .key("AIzaSyB3XIBu35OK_npiXVicBiXfV6ge-NEta24")
-            .radius(1000)
+            .key("AIzaSyC_FZvqoqG9deVZK_xN6dABZn4koTLQJzQ")
+            .radius(500)
             .type(PlaceType.RESTAURANT)
             .latlng(location.latitude, location.longitude)
             .build()
@@ -286,8 +286,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback, PlacesListener,
 
 
         val nrplace2 = NRPlaces.Builder().listener(this)
-            .key("AIzaSyB3XIBu35OK_npiXVicBiXfV6ge-NEta24")
-            .radius(1000)
+            .key("AIzaSyC_FZvqoqG9deVZK_xN6dABZn4koTLQJzQ")
+            .radius(500)
             .type(PlaceType.CAFE)
             .latlng(location.latitude, location.longitude)
             .build()

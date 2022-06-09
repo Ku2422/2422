@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/auction_gothic"
-            android:text="오늘 뭐 먹었게?"
+            android:text="내가 뭘 먹었더라?"
             android:textSize="40dp"
             android:layout_marginTop="100dp"
             android:gravity="center"/>
