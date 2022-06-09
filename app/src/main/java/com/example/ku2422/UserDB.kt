@@ -57,7 +57,7 @@ object UserDB {
 
     //친구추가
     fun adduserFriend(userId:String ,friendId: String,complition:(flag : Boolean)->Unit){
-        var friendcount = 0
+//        var friendcount = 0
         val getFriendRdb = userRdb.child(userId).child("friendId")
         getFriendRdb.addListenerForSingleValueEvent(object: ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
@@ -65,10 +65,10 @@ object UserDB {
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                for(data in snapshot.children){
-                    friendcount = friendcount + 1
-                }
-                getFriendRdb.child(friendcount.toString()).setValue(friendId).addOnCompleteListener {
+//                for(data in snapshot.children){
+//                    friendcount = friendcount + 1
+//                }
+                getFriendRdb.child(friendId).setValue(friendId).addOnCompleteListener {
                     complition(true)
                 }.addOnFailureListener {
                     complition(false)
@@ -80,6 +80,14 @@ object UserDB {
         })
     }
     fun updateTotalReview(userid:String , totalreview:String,complition: (flag: Boolean) -> Unit){
+        userRdb.child(userid).child("totalReviewNum").setValue(totalreview).addOnCompleteListener {
+            complition(true)
+        }.addOnFailureListener {
+            complition(false)
+        }
+    }
+
+    fun updateTotalReview(userid:String , totalreview:Int, complition: (flag: Boolean) -> Unit){
         userRdb.child(userid).child("totalReviewNum").setValue(totalreview).addOnCompleteListener {
             complition(true)
         }.addOnFailureListener {

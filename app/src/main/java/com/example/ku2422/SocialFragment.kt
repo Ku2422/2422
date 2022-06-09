@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +30,7 @@ class SocialFragment : Fragment() {
     private lateinit var binding: FragmentSocialBinding
     private lateinit var adapter: FriendListAdapter
     private lateinit var layoutManager: RecyclerView.LayoutManager
+    lateinit var userId: String
     var friendData: ArrayList<User> = ArrayList()
     var searchData: ArrayList<User> = ArrayList()
     var friendId: ArrayList<String> = arrayListOf()
@@ -44,6 +46,7 @@ class SocialFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentSocialBinding.inflate(inflater, container, false)
 
+        userId = GlobalApplication.getInstance().getValue("userId")!!
 
         getFriendID()
 
@@ -88,12 +91,16 @@ class SocialFragment : Fragment() {
 
     private fun setMainViewModelProperties() {
         mainViewModel.run {
+            Log.i("why", "why" )
             friendIdListLiveData.observe(viewLifecycleOwner){ friendIdUpdated ->
                 friendId = friendIdUpdated
                 getFriendInfo(friendId)
             }
             Log.i("friendInfoLiveData", friendInfoLiveData.value.toString() )
             friendInfoLiveData.observe(viewLifecycleOwner) {
+//                if (friendUserInfoList.size > 0) {
+//                    friendUserInfoList.clear()
+//                }
                 friendUserInfoList.add(it)
                 friendInfoListLiveData.value = friendUserInfoList
             }
@@ -101,6 +108,7 @@ class SocialFragment : Fragment() {
             friendInfoListLiveData.observe(viewLifecycleOwner){
                 friendData = it
                 if (it.size == friendId.size){
+                    Log.e("friendId.size", friendId.size.toString() )
                     Log.e("SocialFragmentsuccess", it.toString() )
                     adapter = FriendListAdapter(it.clone() as ArrayList<User>)
 //                    adapter.searchItem(it)
@@ -115,7 +123,15 @@ class SocialFragment : Fragment() {
                                 transaction.addToBackStack(null)
                                 transaction.commit()
                             } else {
-                                // delete friend
+                                UserDB.deleteFriend(userId, data.userId) {
+                                    if(it) {
+                                        Toast.makeText(requireContext(), data.userId+"님이 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+                                        getFriendID()
+                                    }
+                                }
+//                                setMainViewModelProperties()
+//                                adapter.notifyDataSetChanged()
+//                                getFriendID()
                             }
                         }
                     }
@@ -126,7 +142,8 @@ class SocialFragment : Fragment() {
                             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                     }
                     //adapter.notifyDataSetChanged()
-                }else{
+                }
+                else{
                     Log.e("SocialFragment", "onViewCreated: 몇개? : ${it}", )
                 }
             }
@@ -142,22 +159,27 @@ class SocialFragment : Fragment() {
             val dlgText = view.findViewById<EditText>(R.id.edit_friend_id).text.toString()
             val id = GlobalApplication.getInstance().getValue("userId")
             UserDB.adduserFriend(id!!, dlgText) {
-
+                if (it) {
+                    Toast.makeText(requireContext(), id!!+"님이 추가되었습니다.", Toast.LENGTH_SHORT).show()
+                    getFriendID()
+                }
             }
         }
         view.findViewById<Button>(R.id.btn_cancel).setOnClickListener {
             alertDialog.dismiss()
+//            setMainViewModelProperties()
         }
 
         alertDialog.show()
     }
 
     private fun getFriendID() {
-        val id = GlobalApplication.getInstance().getValue("userId")
+//        val id = GlobalApplication.getInstance().getValue("userId")
 //        val id = "2258618761"
-        if (mainViewModel.friendIdListLiveData.value == null) {
-            mainViewModel.getFriendId(id!!)
-        }
+//        if (mainViewModel.friendIdListLiveData.value == null) {
+//            mainViewModel.getFriendId(userId)
+//        }
+        mainViewModel.getFriendId(userId)
     }
 
     override fun onDestroy() {
