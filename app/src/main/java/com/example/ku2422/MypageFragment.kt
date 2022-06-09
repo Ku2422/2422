@@ -1,5 +1,6 @@
 package com.example.ku2422
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
@@ -107,6 +108,10 @@ class MypageFragment : Fragment() {
                     adapter.searchItem(searchData)
                 }
             }
+            btnLogout.setOnClickListener {
+                val intent = Intent(requireContext(), LoginActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         initSpinner()
@@ -144,57 +149,4 @@ class MypageFragment : Fragment() {
     }
 
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        testclickevent()   //예시
-    }
-
-
-    //예시 로그아웃 버튼 누르면 음식점 저장 기능으로 해놓음
-    private fun testclickevent(){
-        binding.btnLogout.setOnClickListener {
-            testGetValue()
-        }
-    }
-
-    //예시
-    private fun testGetValue() {
-
-        val id =GlobalApplication.getInstance().getValue("userId")
-
-        StoreDB.getStoreById(id!!){
-            Log.e(TAG, "testGetValue: ${it[0].storeName +" "+it[0].price +" "
-                    +it[1].storeName + " " + it[1].price}" )
-
-        }
-//        val StoreInfo = Store(id!!,"sdfsdfsdf.jpg","윤혁","왕소구이",
-//            "간장불백",7000,"구구구ㅜㄱ구ㅜㅅ",5.0, "2022-06-07",
-//            233334f,2323232111f)
-//        StoreDB.insertStore(StoreInfo){
-//
-//        }
-//        UserDB.getFriendList(id!!){
-//            friendId = it[1]
-//            Log.e(TAG, "testGetValue: ${friendId}", )
-//        }
-//        UserDB.deleteUser(id!!){
-//
-//        }
-
-//        UserDB.getUserById(id!!){
-//            Log.e(TAG, "getUserById: ${it.friendId}", )
-//        }
-//        UserDB.adduserFriend(id!!,"201811222"){
-//
-//        }
-//        Log.i(TAG, "testGetValue: $id")
-
-//        var storeInfo = Store("2258663590","말차라떼",4000,"쏘굿굿굿굿",5.0,887789f,123123f)
-//
-//        StoreDB.insertStore(storeInfo){
-//
-//        }
-
-    }
 }
