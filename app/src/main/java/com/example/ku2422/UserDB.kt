@@ -79,6 +79,13 @@ object UserDB {
 
         })
     }
+    fun updateTotalReview(userid:String , totalreview:String,complition: (flag: Boolean) -> Unit){
+        userRdb.child(userid).child("totalReviewNum").setValue(totalreview).addOnCompleteListener {
+            complition(true)
+        }.addOnFailureListener {
+            complition(false)
+        }
+    }
 
     fun deleteUser(userId: String,complition:(flag : Boolean)->Unit){
         userRdb.child(userId).setValue(null).addOnCompleteListener {
