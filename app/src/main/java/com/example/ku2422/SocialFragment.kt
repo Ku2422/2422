@@ -70,7 +70,7 @@ class SocialFragment : Fragment() {
             btnSocialSearch.setOnClickListener {
                 val search = editSocialSearch.text?.toString()
                 if (search == "") {
-//                    mainViewModel.friendUserInfoList.clear()
+                    getFriendID()
                     adapter.searchItem(friendData)
                 } else {
                     if (!searchData.isEmpty())
@@ -91,27 +91,18 @@ class SocialFragment : Fragment() {
 
     private fun setMainViewModelProperties() {
         mainViewModel.run {
-            Log.i("why", "why" )
             friendIdListLiveData.observe(viewLifecycleOwner){ friendIdUpdated ->
                 friendId = friendIdUpdated
                 getFriendInfo(friendId)
             }
-            Log.i("friendInfoLiveData", friendInfoLiveData.value.toString() )
             friendInfoLiveData.observe(viewLifecycleOwner) {
-//                if (friendUserInfoList.size > 0) {
-//                    friendUserInfoList.clear()
-//                }
                 friendUserInfoList.add(it)
                 friendInfoListLiveData.value = friendUserInfoList
             }
-            Log.i("friendInfoListLiveData", friendInfoListLiveData.value.toString() )
             friendInfoListLiveData.observe(viewLifecycleOwner){
                 friendData = it
                 if (it.size == friendId.size){
-                    Log.e("friendId.size", friendId.size.toString() )
-                    Log.e("SocialFragmentsuccess", it.toString() )
                     adapter = FriendListAdapter(it.clone() as ArrayList<User>)
-//                    adapter.searchItem(it)
                     adapter.itemClickListener = object : FriendListAdapter.OnItemClickListener {
                         override fun onItemClick(data: User, btn: Int) {
                             if (btn == 0) {
@@ -129,9 +120,6 @@ class SocialFragment : Fragment() {
                                         getFriendID()
                                     }
                                 }
-//                                setMainViewModelProperties()
-//                                adapter.notifyDataSetChanged()
-//                                getFriendID()
                             }
                         }
                     }
@@ -141,7 +129,6 @@ class SocialFragment : Fragment() {
                         recyclerSocial.layoutManager =
                             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                     }
-                    //adapter.notifyDataSetChanged()
                 }
                 else{
                     Log.e("SocialFragment", "onViewCreated: 몇개? : ${it}", )
@@ -167,18 +154,13 @@ class SocialFragment : Fragment() {
         }
         view.findViewById<Button>(R.id.btn_cancel).setOnClickListener {
             alertDialog.dismiss()
-//            setMainViewModelProperties()
         }
 
         alertDialog.show()
     }
 
     private fun getFriendID() {
-//        val id = GlobalApplication.getInstance().getValue("userId")
-//        val id = "2258618761"
-//        if (mainViewModel.friendIdListLiveData.value == null) {
-//            mainViewModel.getFriendId(userId)
-//        }
+        mainViewModel.friendUserInfoList.clear()
         mainViewModel.getFriendId(userId)
     }
 
