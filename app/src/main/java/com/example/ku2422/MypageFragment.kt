@@ -56,6 +56,7 @@ class MypageFragment : Fragment() {
         binding = FragmentMypageBinding.inflate(inflater, container, false)
 
         userId = GlobalApplication.getInstance().getValue("userId")!!
+//        userId = "2258618761"
         Log.i("userId", userId)
 
         check = requireArguments().getBoolean("check")

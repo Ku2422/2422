@@ -44,11 +44,11 @@ class SocialFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentSocialBinding.inflate(inflater, container, false)
 
+
         getFriendID()
 
         setMainViewModelProperties()
         initLayoutProperties()
-
 
 
         return binding.root
@@ -67,6 +67,7 @@ class SocialFragment : Fragment() {
             btnSocialSearch.setOnClickListener {
                 val search = editSocialSearch.text?.toString()
                 if (search == "") {
+//                    mainViewModel.friendUserInfoList.clear()
                     adapter.searchItem(friendData)
                 } else {
                     if (!searchData.isEmpty())
@@ -87,17 +88,22 @@ class SocialFragment : Fragment() {
 
     private fun setMainViewModelProperties() {
         mainViewModel.run {
-            friendIdListLiveData.observe(this@SocialFragment){ friendIdUpdated ->
-                this@SocialFragment.friendId = friendIdUpdated
-                getFriendInfo(this@SocialFragment.friendId)
+            friendIdListLiveData.observe(viewLifecycleOwner){ friendIdUpdated ->
+                friendId = friendIdUpdated
+                getFriendInfo(friendId)
             }
-            friendInfoLiveData.observe(this@SocialFragment) {
+            Log.i("friendInfoLiveData", friendInfoLiveData.value.toString() )
+            friendInfoLiveData.observe(viewLifecycleOwner) {
                 friendUserInfoList.add(it)
                 friendInfoListLiveData.value = friendUserInfoList
             }
-            friendInfoListLiveData.observe(this@SocialFragment){
-                if (it.size == this@SocialFragment.friendId.size){
+            Log.i("friendInfoListLiveData", friendInfoListLiveData.value.toString() )
+            friendInfoListLiveData.observe(viewLifecycleOwner){
+                friendData = it
+                if (it.size == friendId.size){
+                    Log.e("SocialFragmentsuccess", it.toString() )
                     adapter = FriendListAdapter(it.clone() as ArrayList<User>)
+//                    adapter.searchItem(it)
                     adapter.itemClickListener = object : FriendListAdapter.OnItemClickListener {
                         override fun onItemClick(data: User, btn: Int) {
                             if (btn == 0) {
@@ -115,7 +121,7 @@ class SocialFragment : Fragment() {
                     }
                     binding.run {
                         recyclerSocial.adapter = adapter
-                        binding.recyclerSocial.adapter = adapter
+//                        binding.recyclerSocial.adapter = adapter
                         recyclerSocial.layoutManager =
                             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                     }
@@ -148,10 +154,15 @@ class SocialFragment : Fragment() {
 
     private fun getFriendID() {
         val id = GlobalApplication.getInstance().getValue("userId")
-
+//        val id = "2258618761"
         if (mainViewModel.friendIdListLiveData.value == null) {
             mainViewModel.getFriendId(id!!)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
     }
 
 }

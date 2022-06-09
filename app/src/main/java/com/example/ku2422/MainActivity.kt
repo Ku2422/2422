@@ -67,6 +67,7 @@ class MainActivity : AppCompatActivity(){
                     else -> SocialFragment.getInstance()
 
                 }
+            )
             true
         }
 

@@ -1,6 +1,7 @@
 package com.example.ku2422
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -30,15 +31,22 @@ class SocialListFragment(val data: User) : Fragment() {
         binding = FragmentSocialListBinding.inflate(inflater, container, false)
 
         // get reviewData
-        reviewData.add(Store("2258663590","","user1","건대카페","말차라떼",
-            4500,"so good", 5.0,"2022-01-01", 887789f,123123f)) //temp
-        reviewData.add(Store("2258663590","","user1","레스티오","아이스티",
-            4000,"sooooo good", 4.0,"2022-03-01", 887789f,123123f)) //temp
-        reviewData.add(Store("2258663590","","user1","건대식당","감자탕",
-            9000,"good", 5.0,"2022-02-15", 887789f,123123f)) //temp
+//        reviewData.add(Store("2258663590","","user1","건대카페","말차라떼",
+//            4500,"so good", 5.0,"2022-01-01", 887789f,123123f)) //temp
+//        reviewData.add(Store("2258663590","","user1","레스티오","아이스티",
+//            4000,"sooooo good", 4.0,"2022-03-01", 887789f,123123f)) //temp
+//        reviewData.add(Store("2258663590","","user1","건대식당","감자탕",
+//            9000,"good", 5.0,"2022-02-15", 887789f,123123f)) //temp
 
 
         adapter = ReviewListAdapter(reviewData,0f,0f,false)
+
+        StoreDB.getStoreById(data.userId) {
+            reviewData = it
+            adapter.searchItem(it)
+            Log.i("StoreDB2", it.toString())
+            Log.i("reviewData2", reviewData.toString())
+        }
 
         binding.recyclerReview.adapter = adapter
 
