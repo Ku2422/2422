@@ -34,7 +34,7 @@
                 <EditText android:layout_width="0dp" android:layout_height="match_parent"
                           android:layout_weight="2.5" android:id="@+id/edit_friend_search"
                           android:fontFamily="@font/auction_gothic"
-                          android:hint="친구 이름의 리뷰 검색"
+                          android:hint="친구 리뷰 검색"
                           tools:ignore="SpeakableTextPresentCheck"/>
                 <Spinner android:layout_width="0dp" android:layout_height="wrap_content"
                          android:layout_weight="1"

@@ -97,7 +97,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback, PlacesListener,
         android.Manifest.permission.ACCESS_COARSE_LOCATION
     )
 
-    var locGps = LatLng(37.2892313, 126.8164737)
+    var locGps = LatLng(37.5425241, 127.073699)
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     lateinit var locationRequest: LocationRequest
     lateinit var locationRequest2: LocationRequest

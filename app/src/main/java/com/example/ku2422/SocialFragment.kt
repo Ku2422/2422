@@ -147,7 +147,7 @@ class SocialFragment : Fragment() {
             val id = GlobalApplication.getInstance().getValue("userId")
             UserDB.adduserFriend(id!!, dlgText) {
                 if (it) {
-                    Toast.makeText(requireContext(), id!!+"님이 추가되었습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "친구가 추가되었습니다.", Toast.LENGTH_SHORT).show()
                     getFriendID()
                 }
             }
