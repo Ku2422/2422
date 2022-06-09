@@ -25,8 +25,8 @@ object StoreDB {
                 for (data in snapshot.children) {
                     storeList.add(Store(
                         data.child("userId").value.toString(),
-                        data.child("userImg").value.toString(),
-                        data.child("userName").value.toString(),
+                        data.child("uesrImg").value.toString(),
+                        data.child("uesrName").value.toString(),
                         data.child("storeName").value.toString(),
                         data.child("menu").value.toString(),
                         data.child("price").value.toString().toInt(),

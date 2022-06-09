@@ -47,7 +47,15 @@ class SocialListFragment(val data: User) : Fragment() {
             Log.i("StoreDB2", it.toString())
             Log.i("reviewData2", reviewData.toString())
         }
-
+        adapter.itemClickListener = object: ReviewListAdapter.OnItemClickListener {
+            override fun onItemClick(data: Store) {
+                val frag = MoreReviewFragment(data)
+                val transaction = requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.frame, frag)
+                transaction.addToBackStack(null)
+                transaction.commit()
+            }
+        }
         binding.recyclerReview.adapter = adapter
 
         layoutManager = LinearLayoutManager(activity)

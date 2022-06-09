@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">오늘 뭐 먹었게?</string>
+    <string name="app_name">내가 뭘 먹었더라?</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="kakao_native_app_key">b9aeafb382a3ac4e018558b306c235f1</string>

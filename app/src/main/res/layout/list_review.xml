@@ -18,6 +18,7 @@
         >
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                       android:text="식당 이름" android:textSize="18dp"
+                      android:maxWidth="120dp"
                       android:fontFamily="@font/auction_gothic"
                       android:layout_marginStart="0dp"
                       android:layout_weight="3"
