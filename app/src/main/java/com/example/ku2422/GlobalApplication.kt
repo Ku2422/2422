@@ -42,8 +42,8 @@ class GlobalApplication: Application() {
     }
 
     fun getValue(key:String):String?{
-        Log.i("ta", "getValue: ${sharedPref.getString(key,"ㅗ")}")
-        return sharedPref.getString(key,"ㅗ")
+        Log.i("ta", "getValue: ${sharedPref.getString(key,"k")}")
+        return sharedPref.getString(key,"k")
     }
 
     fun deleteKey(key: String){
