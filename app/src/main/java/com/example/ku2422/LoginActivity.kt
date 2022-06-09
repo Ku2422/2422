@@ -47,10 +47,6 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        GlobalApplication.getInstance().getValue("userId")?.let {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

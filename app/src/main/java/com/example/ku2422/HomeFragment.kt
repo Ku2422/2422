@@ -59,7 +59,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback, PlacesListener,
     }
 
     val dataFormat1 = SimpleDateFormat("yyyy-MM-dd") // 년 월 일
-
+    lateinit var user : User
     var scope = CoroutineScope(Dispatchers.Main)
     lateinit var UID: String
     lateinit var UNAME: String
@@ -164,7 +164,18 @@ class HomeFragment : Fragment(), OnMapReadyCallback, PlacesListener,
                     StoreDB.insertStore(tmpStore) {
 
                     }
+
+                    UserDB.getUserById(UID){
+
+
+                        UserDB.updateTotalReview(UID,it.totalReviewNum+1){
+
+                        }
+                    }
+
+
                 }
+
             })
             if (checkStore) {
                 dialog.showDlg()
